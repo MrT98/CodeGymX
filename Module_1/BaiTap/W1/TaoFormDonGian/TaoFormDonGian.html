@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tạo Form Đơn Giảm</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox{
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 800px;
+			box-shadow: 0 1px 5px -3px, 0 3px 10px -5px;
+			border-radius: 3px;
+		}
+		.phdr{
+			padding: 15px;
+			text-transform: uppercase;
+		}
+		form {
+			padding: 16px 20px 20px 20px;
+		}
+		.right {
+		    text-align: right;
+		}
+		.row {
+			display: flex;
+		}
+		.row .col1 {
+			width: 15%;
+    		padding-right: 8px;
+		}
+		.row .col3 {
+			width: 25%;
+		}
+		.row .col2 {
+			width: 85%;
+		}
+		.row + .row {
+			margin-top: 8px;
+		}
+		.blue-color {
+			color: #0008ff;
+		}
+		.red-color {
+			color: #ff1212;
+		}
+		select {
+			min-width: 84px;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="phdr" style="background: #FF9800;">YOUR FAVORITE</div>
+		<form>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Yourname:
+				</div>
+				<div class="col2">
+					<input type="username" name="" /><br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Email:
+				</div>
+				<div class="col2">
+					<input type="email" name="" /><br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Hobby:
+				</div>
+				<div class="col2">
+					<div class="row">
+						<div class="col3">
+							<input id="sport" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="sport">Sport</label>
+						</div>
+						<div class="col3">
+							<input id="music" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="music">Music</label>
+						</div>
+						<div class="col3">
+							<input id="read" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="read">Reading books</label><br />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col3">
+							<input id="web" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="web">Surf the web</label>
+						</div>
+						<div class="col3">
+							<input id="game" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="game">Gaming</label>
+						</div>
+						<div class="col3">
+							<input id="Film" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="Film">Film</label><br />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col3">
+							<input id="Travel" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="Travel">Travel</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 20px">
+				<div class="col1 right"></div>
+				<div class="col2">
+					<button>Submit Form</button>
+					<button>Reset Form</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="regBox">
+		<div class="phdr" style="background: #FF9800;">Registration of students</div>
+		<form>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Yourname:
+				</div>
+				<div class="col2">
+					<input type="username" name="" /><br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Birthday:
+				</div>
+				<div class="col2">
+					<input type="birthday" name="" /><br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Sex:
+				</div>
+				<div class="col2">
+					<div class="row">
+						<div class="col1">
+							<input id="sport" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="sport">Male</label>
+						</div>
+						<div class="col1">
+							<input id="music" type="checkbox" name="hobby[]" value="1">
+							<label class="red-color" for="music">Female</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Address:
+				</div>
+				<div class="col2">
+					<input type="text" name="" /><br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Class:
+				</div>
+				<div class="col2">
+					<select>
+						<option>Select one</option>
+						<option>A1</option>
+						<option>A2</option>
+						<option>A3</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Email:
+				</div>
+				<div class="col2">
+					<input type="email" name="" /><br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col1 right blue-color">
+					Phone:
+				</div>
+				<div class="col2">
+					<input type="text" name="" /><br />
+				</div>
+			</div>
+			<div class="row" style="margin-top: 20px">
+				<div class="col1 right"></div>
+				<div class="col2">
+					<button>Submit Form</button>
+					<button>Reset Form</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
