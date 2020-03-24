@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Bài tập 1 về FormHtml</title>
+</head>
+<style type="text/css">
+	html, body {
+		background: #f6f6f6;
+		font-size: 16px;
+		font-family: "Lucida Grande","Lucida Sans Unicode", Tahoma, sans-serif;
+		line-height: 1.1;
+	}
+	.regBox {
+		max-width: 500px;
+		margin: 30px auto;
+		padding: 20px;
+		background: #fff;
+		box-shadow: 0 0 5px -1px #00000096;
+		border-radius: 3px;
+	}
+	.wufoo {
+
+	}
+</style>
+<body>
+	<div class="regBox">
+		<form action="/exp1.html" method="POST" class="wufoo">
+			<h2>Order Form</h2>
+			<p>What would you like to buy?</p>
+			<select name="in1">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+			</select>
+
+			<p>How many would you like to order?</p>
+			<input type="radio" name="rd"/> 1 - $10 <br />
+			<input type="radio" name="rd"/> 2 - $20 <br />
+			<input type="radio" name="rd"/> 3 - $25 <br />
+
+			<p>Name <span style="color: red">*</span> </p>
+			<input type="text" name="firstname" placeholder="FirstName" size="15"/>
+			<input type="text" name="lastname" placeholder="LastName" size="15"/>
+			<p>Email</p>
+			<input type="text" name="email" size="35"/>
+			<p>Phone Number</p>
+			<input type="text" name="phone1" size="5"/> -
+			<input type="text" name="phone2" size="5"/> -
+			<input type="text" name="phone3" size="5"/>
+			<br />
+			<br />
+			<center>
+				<button>Submit</button>
+			</center>
+		</form>
+	</div>
+</body>
+</html>
