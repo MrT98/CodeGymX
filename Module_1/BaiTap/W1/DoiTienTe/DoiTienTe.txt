@@ -1,0 +1,6 @@
+﻿BIGIN
+	INPUT D
+	V = D*23000
+
+	DISPLAY "V"
+END

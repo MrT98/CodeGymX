@@ -1,0 +1,10 @@
+﻿BIGIN
+	      N = RAMDOM(0, 9)
+	INPUT M
+
+	IF M = N
+		DISPLAY "Lựa chọn đúng."
+	ELSE
+		DISPLAY "Lựa chọn sai."
+	END IF
+END
