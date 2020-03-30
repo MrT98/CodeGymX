@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>[Thực hành] Hiển thị đầu ra</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 500px;
+			padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<button id="testAlert">Show Alert</button>
+	</div>
+
+	<div class="regBox">
+		<div id="testI1"></div>
+		<button id="testInnerHTML">test innerHTML</button>
+		<button id="resetInnerHTML">Reset</button>
+	</div>
+
+	<div class="regBox">
+		<button id="documentWrite">documentWrite</button>
+	</div>
+
+	<div class="regBox">
+		<button id="consoleLog">Console log</button>
+	</div>
+
+	<script type="text/javascript">
+		// test1
+		let testAlert = document.querySelector('#testAlert');
+		testAlert.addEventListener('click', function(e) {
+			alert('Test show Alert');
+		});
+
+		// test2
+		let testI1        = document.querySelector('#testI1');
+		let testInnerHTML = document.querySelector('#testInnerHTML');
+		testInnerHTML.addEventListener('click', function(e) {
+			testI1.innerHTML = '<h3>TEST</h3>';
+		});
+		let resetInnerHTML = document.querySelector('#resetInnerHTML');
+		resetInnerHTML.addEventListener('click', function(e) {
+			testI1.innerHTML = '';
+		});
+
+		// test3
+		let documentWrite = document.querySelector('#documentWrite');
+		documentWrite.addEventListener('click', function(e) {
+			document.write('Xin chào!');
+		});
+
+		// test3
+		let consoleLog = document.querySelector('#consoleLog');
+		consoleLog.addEventListener('click', function(e) {
+			console.log('Xin chào!');
+		});
+	</script>
+</body>
+</html>
