@@ -1,9 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<meta charset="utf-8">
+	<title>[Bài tập] Ứng dụng chuyển đổi tiền tệ</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 700px;
+			box-shadow: 0 0 5px -3px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #ddd;
+		}
+		.row {
+			display: flex;
+		}
+		.col25 {
+			width: 25%;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
-	<div class="regBox"></div>
+	<div class="regBox">
+		<div class="list">Chuyển đổi tiền tệ</div>
+		<div class="list">
+			<div class="row">
+				<div class="col25">
+					<label for="amount">Amount</label><br>
+					<input id="amount" type="text" name="">
+				</div>
+				<div class="col25">
+					<label for="fcurrency">From Currency</label><br>
+					<select id="fcurrency">
+						<option value="vnd" selected>VND</option>
+						<option value="usd">USD</option>
+					</select>
+				</div>
+				<div class="col25">
+					<label for="tcurrency">To Currency</label><br>
+					<select id="tcurrency">
+						<option value="vnd">VND</option>
+						<option value="usd" selected>USD</option>
+					</select>
+				</div>
+				<div class="col25">
+					<br><button id="covert">Covert</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		let amount    = document.querySelector('#amount');
+		let fcurrency = document.querySelector('#fcurrency');
+		let tcurrency = document.querySelector('#tcurrency');
+		let covert    = document.querySelector('#covert');
+		covert.addEventListener('click', function(e) {
+			let t = parseInt(amount.value);
+			if (isNaN(t)) {
+				alert('Số tiền nhập vào không hợp lệ.');
+				return void 0;
+			}
+			let c = t;
+			switch(fcurrency.value){
+				case 'vnd':
+					if(tcurrency.value == 'usd'){
+						c = t*0.000043;
+						c = new Intl.NumberFormat('en-US', {
+							style: 'currency',
+							currency: 'USD',
+						});
+						c = c.format(t*0.000043);
+
+						t = new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(t);
+					}
+					break;
+
+				case 'usd':
+					if(tcurrency.value == 'vnd'){
+						c = new Intl.NumberFormat('vi-VN', {
+							style: 'currency',
+							currency: 'VND',
+						});
+						c = c.format(t/0.000043);
+						t = new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD',}).format(t);
+
+					}
+					break;
+			}
+			alert(t + ' = ' + c);
+		});
+	</script>
 </body>
 </html>
