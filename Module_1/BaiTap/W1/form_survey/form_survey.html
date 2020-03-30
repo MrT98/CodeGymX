@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Tạo form lấy survey khách hàng</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+			font-size: 16px;
+			font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+		}
+		.regBox {
+			background: #fff;
+			max-width: 700px;
+			margin: 30px auto;
+		}
+		.list2 {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #ddd;
+		}
+		.sub {
+			font-size: 14px;
+		}
+		.list2:focus-within {
+		  	background: #ffd18c
+		}
+		.otherHiden {
+			display: none;
+		}
+		#Other:checked + .otherHiden {
+			display: block;
+		}
+		table {
+			width: 100%;
+   	 		border-collapse: collapse;
+		}
+		thead {
+			background: #cccccc29;
+		}
+		thead tr th {
+			padding: 8px;
+		}
+		tbody tr td {
+			padding: 6px;
+		}
+		th, td {
+			border: 1px solid #cacaca4d;
+			text-align: center;
+		}
+		tbody tr:nth-child(2) {
+			background: #c4c4c41f;
+		}
+		td:first-child {
+			text-align: left;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<form>
+			<div class="list list2">
+				<h1>Market Research Survey</h1>
+				<div class="sub">Please take a few moments to complete this satisfaction survey.</div>
+			</div>
+			<div class="list">
+				<div class="list2">
+					<label for="age"><strong>What is your age range?</strong></label>
+					<select class="tFocus" id="age" style="width: 100%">
+						<option value="1" selected>18 - 34</option>
+						<option value="2">25 - 34</option>
+						<option value="3">35 - 50</option>
+						<option value="4">50+</option>
+					</select>
+				</div>
+				<div class="list2">
+					<label for="income"><strong>What is your yearly income range?</strong></label>
+					<select class="tFocus" id="income" style="width: 100%">
+						<option value="1" selected>$0 - $25,000</option>
+						<option value="2">$25,001 - $50,000</option>
+						<option value="3">$50,001 - $100,000</option>
+						<option value="4">$100,000+</option>
+					</select>
+				</div>
+				<div class="list2">
+					<strong>Gender Identity</strong><br>
+					<input id="male" type="radio" name="sex" value="1">
+					<label for="male">Male</label><br />
+					<input id="female" type="radio" name="sex" value="2">
+					<label for="female">Female</label><br />
+					<input id="Nonbinary" type="radio" name="sex" value="3">
+					<label for="Nonbinary">Nonbinary</label><br />
+					<input id="Other" type="radio" name="sex" value="4">
+					<label for="Other">Other</label><br />
+					<div class="otherHiden">
+						<input type="text" name="otherGender" />
+						<div class="sub">Maximum of <strong>250</strong> characters.    <i>Currently Used: <strong>0</strong> characters.</i></div>
+					</div>
+				</div>
+				<div class="list2">
+					<strong>Which of the following products have your purchased in the last 2 months. Please check all that apply.</strong><br>
+					<input id="p1" type="checkbox" name="products[]" value="1" />
+					<label for="p1">Product 1</label><br />
+					<input id="p2" type="checkbox" name="products[]" value="2" />
+					<label for="p2">Product 2</label><br />
+					<input id="p3" type="checkbox" name="products[]" value="3" />
+					<label for="p3">Product 3</label><br />
+				</div>
+				<div class="list2">
+					<strong>How often would you use our new product?</strong><br>
+					<input id="ot1" type="radio" name="often" value="1" />
+					<label for="ot1">Daily</label><br />
+					<input id="ot2" type="radio" name="often" value="2" />
+					<label for="ot2">Weekly</label><br />
+					<input id="ot3" type="radio" name="often" value="3" />
+					<label for="ot3">Monthly</label><br />
+				</div>
+				<div class="list2">
+					<strong>What would you pay for the new product?</strong><br>
+					<div style="display: flex;">
+						$
+						<div style="width: 72px;">
+							<input id="Dollars" type="text" name="Dollars" style="width: 68px;" /><br>
+							<label for="Dollars">Dollars</label>
+						</div>
+						.
+						<div style="width: 30px;">
+							<input id="Cents" type="text" name="Cents" style="width: 26px;" /><br>
+							<label for="Cents">Cents</label>
+						</div>
+					</div>
+				</div>
+				<div class="list2">
+					<strong>What features would you like to see in the new product.</strong><br>
+					<textarea style="width: 100%; min-height:100px"></textarea>
+				</div>
+				<div class="list2">
+					<strong>Please rate your level of agreement with the following statements.</strong><br>
+					<table style="width: 100%">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Strongly Disagree</th>
+								<th>Disagree</th>
+								<th>Agree</th>
+								<th>Strongly Agree</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Our products are priced fairly.</td>
+								<td>
+									<input id="t11" type="radio" name="t1" value="1">
+									<label for="t11">1</label>
+								</td>
+								<td>
+									<input id="t12" type="radio" name="t1" value="2">
+									<label for="t12">2</label>
+								</td>
+								<td>
+									<input id="t13" type="radio" name="t1" value="3">
+									<label for="t13">3</label>
+								</td>
+								<td>
+									<input id="t14" type="radio" name="t1" value="4">
+									<label for="t14">4</label>
+								</td>
+							</tr>
+							<tr>
+								<td>Our products are high quality.</td>
+								<td>
+									<input id="t21" type="radio" name="t2" value="1">
+									<label for="t21">1</label>
+								</td>
+								<td>
+									<input id="t22" type="radio" name="t2" value="2">
+									<label for="t22">2</label>
+								</td>
+								<td>
+									<input id="t23" type="radio" name="t2" value="3">
+									<label for="t23">3</label>
+								</td>
+								<td>
+									<input id="t24" type="radio" name="t2" value="4">
+									<label for="t24">4</label>
+								</td>
+							</tr>
+							<tr>
+								<td>You would recommend our product to a friend or coworker.</td>
+								<td>
+									<input id="t31" type="radio" name="t3" value="1">
+									<label for="t31">1</label>
+								</td>
+								<td>
+									<input id="t32" type="radio" name="t3" value="2">
+									<label for="t32">2</label>
+								</td>
+								<td>
+									<input id="t33" type="radio" name="t3" value="3">
+									<label for="t33">3</label>
+								</td>
+								<td>
+									<input id="t34" type="radio" name="t3" value="4">
+									<label for="t34">4</label>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div style="padding: 15px">
+					<button>Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+		let otherHiden = document.querySelector('.otherHiden');
+		let gender = document.querySelectorAll('input[name="sex"]');
+		gender.forEach(function(input){
+			input.addEventListener('change', function(e){
+				if (this.value === '4') {
+					otherHiden.style.display = 'block';
+				}else{
+					otherHiden.style.display = 'none';
+				}
+			});
+		});
+	</script>
+</body>
+</html>
