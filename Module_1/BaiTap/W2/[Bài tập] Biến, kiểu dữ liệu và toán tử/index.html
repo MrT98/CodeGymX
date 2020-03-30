@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 700px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #ddd;
+		}
+		p {
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="list">
+			<strong>Tính điểm sinh viên</strong>
+		</div>
+		<div class="list">
+			<p>- Nhập điểm các môn học sau:</p><br>
+			<div style="display: flex">
+				<div style="width: 33%;">
+					<label for="vatLy">Vật lý</label><br>
+					<input style="width: 90%" id="vatLy" type="text" name="" placeholder="Vật lý">
+				</div>
+				<div style="width: 33%;">
+					<label for="hoaHoc">Hóa học</label><br>
+					<input style="width: 90%" id="hoaHoc" type="text" name="" placeholder="Hóa học">
+				</div>
+				<div style="width: 33%;">
+					<label for="sinhHoc">Sinh học</label><br>
+					<input style="width: 90%" id="sinhHoc" type="text" name="" placeholder="Sinh học">
+				</div>
+			</div>
+			<br><br>
+			<button id="btnCount1">Tính điểm</button>
+		</div>
+	</div>
+	<div class="regBox">
+		<div class="list">
+			<strong>Chuyển đổi nhiệt độ</strong>
+		</div>
+		<div class="list">
+			<p>- Đổi độ C sang dộ F:</p><br>
+			<input id="inputDoC" type="text" name="" placeholder="Nhập...">℃
+			<span id="showDoF" style="display: none;"> = <span style="font-weight: bold;color: #F44336;"></span></span>
+		</div>
+	</div>
+	<div class="regBox">
+		<div class="list">
+			<strong>Tính diện tích và chu vi hình chòn</strong>
+		</div>
+		<div class="list">
+			<label for="bankinh">Bán kính</label><br>
+			<input id="bankinh" type="text" name="" placeholder="Bán kính">
+			<button id="btnDienTich">Tính</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		// Tính điểm trung bình
+		let vatLy     = document.querySelector('#vatLy');
+		let hoaHoc    = document.querySelector('#hoaHoc');
+		let sinhHoc   = document.querySelector('#sinhHoc');
+		let btnCount1 = document.querySelector('#btnCount1');
+		btnCount1.addEventListener('click', function(e){
+			let diemLy   = parseInt(vatLy.value);
+			let diemHoa  = parseInt(hoaHoc.value);
+			let diemSinh = parseInt(sinhHoc.value);
+			if (isNaN(diemLy) || isNaN(diemHoa) || isNaN(diemSinh)) {
+				alert('Điểm nhập vào không hợp lệ.');
+			}else{
+				let tong = diemLy+diemHoa+diemSinh;
+				alert('Điểm trung bình: ' + tong/3 + '\nTổng điểm: '+tong);
+			}
+		});
+
+
+		// chuyển đổi nhiệt độ
+		let inputDoC = document.querySelector('#inputDoC');
+		let showDoF  = document.querySelector('#showDoF');
+		let valF     = showDoF.querySelector('span');
+		inputDoC.addEventListener('input', function(e) {
+			let value = this.value.trim();
+			let f = (value/5)*9 + 32;
+			if (isNaN(f) || value.length == 0) {
+				showDoF.style.display = 'none';
+			}else {
+				this.value = value;
+				showDoF.style.display = 'inline-block';
+				valF.innerText = f.toFixed(2) + '℉';
+			}
+		});
+
+
+		// Tính diện tích và chu vi hình tròn
+		let bankinh     = document.querySelector('#bankinh');
+		let btnDienTich = document.querySelector('#btnDienTich');
+		btnDienTich.addEventListener('click', function(){
+			let r = parseInt(bankinh.value);
+			if (isNaN(r)) {
+				alert('Bán kính nhập vào không hợp lệ.');
+			}else{
+				let s = r*r*Math.PI;
+				let c = (r+r)*Math.PI;
+				alert('Chu vi hình chòn là: ' + c.toFixed(2) + '\nDiện tích hình chòn là: '+s.toFixed(2));
+			}
+		});
+	</script>
+</body>
+</html>
