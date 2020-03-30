@@ -55,6 +55,7 @@
 					<br><button id="covert">Covert</button>
 				</div>
 			</div>
+			<div id="results" style="padding: 13px 0 0 0;color: #F44336;"></div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -62,6 +63,7 @@
 		let fcurrency = document.querySelector('#fcurrency');
 		let tcurrency = document.querySelector('#tcurrency');
 		let covert    = document.querySelector('#covert');
+		let results   = document.querySelector('#results');
 		covert.addEventListener('click', function(e) {
 			let t = parseInt(amount.value);
 			if (isNaN(t)) {
@@ -95,7 +97,7 @@
 					}
 					break;
 			}
-			alert(t + ' = ' + c);
+			results.innerText = c;
 		});
 	</script>
 </body>
