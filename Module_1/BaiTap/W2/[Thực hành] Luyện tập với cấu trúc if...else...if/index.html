@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>[Thực hành] Luyện tập với cấu trúc if...else...if</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto;
+			max-width: 700px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #ddd;
+		}
+		.green {
+			background: #67d36c;
+			color: white;
+		}
+		.yellow {
+			background: #FFC107;
+			color: white;
+		}
+		.red {
+			background: #FF5722;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="list" style="text-align: center"><strong>Thiết lập</strong></div>
+		<div class="list">
+			<label for="setName">Tên đăng nhập:</label>
+			<input id="setName" type="text" name="setName" placeholder="Admin" value="Admin">
+		</div>
+		<div class="list">
+			<label for="setName">Mật khẩu:</label>
+			<input id="setPass" type="text" name="setPass" placeholder="TheMaster" value="TheMaster">
+		</div>
+	</div>
+	<div class="regBox">
+		<div class="status list" style="display: none"></div>
+		<div class="list">
+			<input type="text" name="username" placeholder="Who's there?">
+		</div>
+		<div class="pass list" style="display: none">
+			<input type="password" name="password" placeholder="Password?">
+		</div>
+	</div>
+	<script type="text/javascript">
+		let BaiTap = function(){
+			this.setName       = document.querySelector('#setName');
+			this.setPass       = document.querySelector('#setPass');
+
+			this.boxPass       = document.querySelector('.pass');
+			this.boxStatus     = document.querySelector('.status');
+			this.inputUsername = document.querySelector('input[name="username"]');
+			this.inputPassword = document.querySelector('input[name="password"]');
+
+			this.init();
+		}
+		BaiTap.prototype.init = function(first_argument) {
+			this.setName.addEventListener('input', function() {
+				this.checkUsername();
+			}.bind(this));
+
+			this.inputUsername.addEventListener('input', function() {
+				this.checkUsername();
+			}.bind(this));
+
+			this.setPass.addEventListener('input', function() {
+				this.checkPass();
+			}.bind(this));
+
+			this.inputPassword.addEventListener('input', function() {
+				this.checkPass();
+			}.bind(this));
+		};
+
+		BaiTap.prototype.checkUsername = function() {
+			let check = new RegExp('^' + this.setName.value + '$', 'i');
+				check     = check.test(this.inputUsername.value);
+			if (check) {
+				this.boxPass.style.display = 'block';
+			}else{
+				this.boxPass.style.display = 'none';
+				if (this.inputUsername.value === 'null') {
+					this.showYellowBox('canceld');
+				}else{
+					this.showRedBox('I don’t know you');
+				}
+			}
+		}
+
+		BaiTap.prototype.checkPass = function() {
+			if (this.inputPassword.value.length > 0) {
+				this.boxStatus.style.display = 'block';
+				if (this.inputPassword.value === this.setPass.value) {
+					this.showGreenBox('Welcome');
+				}else if(this.inputPassword.value === 'null'){
+					this.showYellowBox('Canceled');
+				}else{
+					this.showRedBox('Wrong password');
+				}
+			}else{
+				this.boxStatus.classList.remove('red');
+				this.boxStatus.classList.remove('yellow');
+				this.boxStatus.classList.remove('green');
+				this.boxStatus.style.display = 'none';
+			}
+		}
+		BaiTap.prototype.showGreenBox = function(text) {
+			this.boxStatus.innerText  = text;
+			this.boxStatus.classList.add('green');
+			this.boxStatus.classList.remove('yellow');
+			this.boxStatus.classList.remove('red');
+		}
+		BaiTap.prototype.showYellowBox = function(text) {
+			this.boxStatus.innerText  = text;
+			this.boxStatus.classList.add('yellow');
+			this.boxStatus.classList.remove('red');
+			this.boxStatus.classList.remove('green');
+		}
+		BaiTap.prototype.showRedBox = function(text) {
+			this.boxStatus.innerText = text;
+			this.boxStatus.classList.add('red');
+			this.boxStatus.classList.remove('yellow');
+			this.boxStatus.classList.remove('green');
+		}
+
+		new BaiTap();
+	</script>
+</body>
+</html>
