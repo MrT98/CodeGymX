@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>[Thực hành] Sự kiện chuột</title>
+</head>
+<body>
+<img src="1.png" style="width: 100px; position: absolute; left: 0; top:0">
+<div style="margin: 120px auto; text-align: center;">
+	<input id="setAuto" type="checkbox" name="auto">
+	<label for="setAuto">Tự động</label>
+	<br />
+	<br />
+	<button>Run</button>
+	<script type="text/javascript">
+		let checkAuto = document.querySelector('#setAuto');
+		let img       = document.querySelector('img');
+		let btn       = document.querySelector('button');
+		let isStart   = false;
+		let isBack    = false;
+		let interval   = null;
+		img.x_w = 0;
+		function start(){
+			if (checkAuto.checked) {
+				play();
+			}else{
+				btn.innerText = 'Run';
+				clearInterval(interval);
+				isStart = false;
+			}
+		}
+
+		function play(){
+			let x = 10;
+			let max = window.innerWidth - img.width;
+			if (checkAuto.checked) {
+				x = 2;
+			}
+			if (isBack) {
+				img.x_w -= x;
+				if (img.x_w <= 0) {
+					img.x_w = 0;
+					isBack = false;
+				}
+			}else{
+				img.x_w += x;
+				if (img.x_w >= max) {
+					img.x_w = max;
+					isBack = true;
+				}
+			}
+			img.style.left = img.x_w + 'px';
+		}
+		btn.addEventListener('click', function() {
+			if (checkAuto.checked) {
+				isStart = !isStart;
+				if (isStart) {
+					interval = setInterval(function(){
+						start();
+					}, 5);
+					btn.innerText = 'Stop';
+				}else{
+					btn.innerText = 'Run';
+					clearInterval(interval);
+				}
+			}else{
+				play();
+			}
+		});
+	</script>
+</div>
+</body>
+</html>
