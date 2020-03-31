@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>[Thực hành] Kiểm tra năm nhuận</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			padding: 15px;
+			max-width: 700px;
+			margin: 30px auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<input type="number" name="year" placeholder="Nhập một Năm...">
+		<button>Kiểm tra</button>
+	</div>
+	<script type="text/javascript">
+		let input  = document.querySelector('input');
+		let button = document.querySelector('button');
+
+		let check = function(year){
+			year = parseInt(year);
+			if (isNaN(year)) {
+				alert('Vui lòng nhập đúng...');
+			}else{
+				let isLeapYear = false;
+		        let isDivisibleBy4 = year % 4 == 0;
+		        if(isDivisibleBy4){
+		            let isDivisibleBy100 = year % 100 == 0;
+		            if(isDivisibleBy100){
+		                let isDivisibleBy400 = year % 400 == 0;
+		                if(isDivisibleBy400){
+		                    isLeapYear = true;
+		                }
+		            } else {
+		                isLeapYear = true;
+		            }
+		        }
+
+		        if(isLeapYear){
+		            alert(year + ' là năm nhuận');
+		        } else {
+		            alert(year + ' không phải năm nhuận');
+		        }
+			}
+		}
+
+		button.addEventListener('click', function(){
+			check(input.value);
+		});
+	</script>
+</body>
+</html>
