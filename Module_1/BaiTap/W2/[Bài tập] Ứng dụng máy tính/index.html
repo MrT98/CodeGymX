@@ -241,11 +241,11 @@
 							break;
 					}
 				}
-				dataCount.push({value:value});
-				parseText();
-				if (totall === 0) {
+				if (totall === 0 && dataCount.length === 0) {
 					totall = value;
 				}
+				dataCount.push({value:value});
+				parseText();
 			}
 			boxNumber.value = totall;
 			totall = 0;
