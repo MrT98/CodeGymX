@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>[Practice] Keyboard events</title>
+</head>
+<body>
+	<div id="nhanVat" style="width: 1px; height: 1px; position: absolute; left: 0; top:0">
+		<img src="1.png" style="width: 80px; position: absolute; left: -40px; top:-50px">
+	</div>
+	<script type="text/javascript">
+		let BaiTap = function(){
+			this.nhanVat = document.querySelector('#nhanVat');
+			this.width  = 40;
+			this.height = 50;
+			this.x = window.innerWidth/2 - this.width;
+			this.y = window.innerHeight/2 - this.height;
+			this.nhanVat.style.left = this.x + 'px';
+			this.nhanVat.style.top  = this.y + 'px';
+			this.init();
+		}
+		BaiTap.prototype.init = function(){
+			window.addEventListener('keydown', function(e) {
+				this.move(e.keyCode);
+			}.bind(this));
+		}
+		BaiTap.prototype.move = function(key){
+			switch(key){
+				case 37:
+					this.leftArrowPressed();
+					break;
+				case 39:
+				   this.rightArrowPressed();
+					break;
+				case 38:
+					this.upArrowPressed();
+					break;
+				case 40:
+					this.downArrowPressed();
+					break;
+			}
+			this.update();
+		}
+		BaiTap.prototype.leftArrowPressed = function(){
+			this.x -= 5;
+			if (this.x <= 40) {
+				this.x = 40;
+			}
+		}
+		BaiTap.prototype.rightArrowPressed = function(){
+			this.x += 5;
+			let check = window.innerWidth-40;
+			if (check <= this.x) {
+				this.x = check;
+			}
+		}
+		BaiTap.prototype.upArrowPressed = function(){
+			this.y -= 5;
+			if (this.y <= 40) {
+				this.y = 40;
+			}
+		}
+		BaiTap.prototype.downArrowPressed = function(){
+			this.y += 5;
+			let check = window.innerHeight-40;
+			if (check <= this.y) {
+				this.y = check;
+			}
+		}
+		BaiTap.prototype.update = function(){
+			this.nhanVat.style.left = this.x + 'px';
+			this.nhanVat.style.top  = this.y + 'px';
+		}
+		BaiTap = new BaiTap();
+	</script>
+</div>
+</body>
+</html>
