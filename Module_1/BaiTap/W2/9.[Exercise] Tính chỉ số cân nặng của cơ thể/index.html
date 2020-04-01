@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>[Bài tập]Tính chỉ số cân nặng của cơ thể</title>
+</head>
+<body>
+	<div class="regBox">
+		<label for="weight">Cân nặng (kg)</label><br>
+		<input id="weight" type="text" name="weight" placeholder="Cân nặng (kg)"><br><br>
+		<label for="height">Chiều cao (m)</label><br>
+		<input id="height" type="text" name="height" placeholder="Chiều cao (m)"><br><br>
+		<button>Tính</button>
+	</div>
+	<script type="text/javascript">
+		let weight = document.querySelector('#weight');
+		let height = document.querySelector('#height');
+		let button = document.querySelector('button');
+		button.addEventListener('click', function() {
+			let result = weight.value/(height.value^2);
+			let status = '';
+			if (result < 18.5) {
+				status = 'Underweight';
+			} else if(result >= 18.5 && result < 25){
+				status = 'Normal';
+			} else if(result >= 25 && result < 30){
+				status = 'Overweight';
+			} else if(result >= 30){
+				status = 'Obese';
+			}
+			alert('Chỉ số BMI là: ' + result + ' (' + status + ')');
+		});
+	</script>
+</body>
+</html>
