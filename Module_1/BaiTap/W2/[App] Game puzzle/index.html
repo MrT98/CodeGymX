@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+	<meta name="viewport" content="width=800">
 	<title>[App] Game puzzle</title>
 	<style type="text/css">
 		*, *:before, *:after {
@@ -134,6 +134,7 @@
 			height: 600px;
 			width: 600px;
 			overflow: hidden;
+			touch-action: none;
 		}
 		.boxGame .item {
 			position: absolute;
@@ -340,6 +341,7 @@
 				el.addEventListener('click', function(e){
 					this.level = e.target.getAttribute('level');
 					this.closeDialog();
+					this.stop();
 					this.start();
 				}.bind(this));
 			}.bind(this));
@@ -707,18 +709,6 @@
 				});
 			});
 			return matrix;
-		}
-
-		// Tráo ngẫu nhiên
-		puzzle.prototype.shuffle = function(array) {
-			let m = array.length, t, i;
-			while (m) {
-				i = Math.floor(Math.random()*m--);
-				t = array[m];
-				array[m] = array[i];
-				array[i] = t;
-			}
-			return array;
 		}
 
 		let RedT = new puzzle();
