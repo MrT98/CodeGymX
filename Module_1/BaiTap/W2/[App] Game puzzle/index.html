@@ -536,19 +536,23 @@
 				if (dx >= bol2) {
 					this.moveRight();
 					this.touchEnd();
+					return void 0;
 				}
 				if (dx <= -bol2) {
 					this.moveLeft();
 					this.touchEnd();
+					return void 0;
 				}
 
 				if (dy >= bol2) {
 					this.moveBottom();
 					this.touchEnd();
+					return void 0;
 				}
 				if (dy <= -bol2) {
 					this.moveTop();
 					this.touchEnd();
+					return void 0;
 				}
 			}
 		}
