@@ -534,24 +534,28 @@
 
 				let bol2 = this.width/2;
 				if (dx >= bol2) {
-					this.moveRight();
 					this.touchEnd();
+					this.moveRight();
+					this.checkWin();
 					return void 0;
 				}
 				if (dx <= -bol2) {
-					this.moveLeft();
 					this.touchEnd();
+					this.moveLeft();
+					this.checkWin();
 					return void 0;
 				}
 
 				if (dy >= bol2) {
-					this.moveBottom();
 					this.touchEnd();
+					this.moveBottom();
+					this.checkWin();
 					return void 0;
 				}
 				if (dy <= -bol2) {
-					this.moveTop();
 					this.touchEnd();
+					this.moveTop();
+					this.checkWin();
 					return void 0;
 				}
 			}
