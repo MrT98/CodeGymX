@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<title>[App] Game puzzle</title>
 	<style type="text/css">
 		*, *:before, *:after {
@@ -132,6 +133,7 @@
 			position: relative;
 			height: 600px;
 			width: 600px;
+			overflow: hidden;
 		}
 		.boxGame .item {
 			position: absolute;
@@ -289,6 +291,8 @@
 			this.paint         = false;
 			this.level         = 4;
 			this.img           = '';
+
+			this.arrTime = [];
 
 			this.isTouch       = false;
 			this.pointStart    = null;
@@ -459,18 +463,23 @@
 				this.paint = true;
 				let ic = 0;
 				this.jumblyMatrix.forEach(function(row, indexRow){
-					row.forEach(function(cell, indexCell){
-						setTimeout(function(){
-							let fromMatrix = this.matrix[indexRow][indexCell];
-							cell.el.style.left = fromMatrix.x + 'px';
-							cell.el.style.top  = fromMatrix.y + 'px';
-							let check = this.level-1;
-							if (indexRow === check && indexCell === check) {
-								this.play();
+					if (this.paint){
+						row.forEach(function(cell, indexCell){
+							if (this.paint){
+								let regTime = setTimeout(function(){
+									let fromMatrix = this.matrix[indexRow][indexCell];
+									cell.el.style.left = fromMatrix.x + 'px';
+									cell.el.style.top  = fromMatrix.y + 'px';
+									let check = this.level-1;
+									if (indexRow === check && indexCell === check) {
+										this.play();
+									}
+								}.bind(this), ic*7);
+								this.arrTime.push(regTime);
+								ic++;
 							}
-						}.bind(this), ic*7);
-						ic++;
-					}.bind(this));
+						}.bind(this));
+					}
 				}.bind(this));
 				this.paint = false;
 			}.bind(this), 1000);
@@ -493,7 +502,10 @@
 			this.boxGame.innerHTML = '';
 			this.matrix            = [];
 			clearTimeout(this.regTime1);
-			clearTimeout(this.regTime2);
+			this.arrTime.forEach(function(time){
+				clearTimeout(time);
+			});
+			this.arrTime = [];
 		}
 
 		// đăng ký sự kiện nhấn và chạm
