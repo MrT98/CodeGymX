@@ -286,10 +286,12 @@
 	<script type="text/javascript">
 		let puzzle = function(argument) {
 			this.isplay        = false;
+			this.paint         = false;
 			this.level         = 4;
 			this.img           = '';
 
-			this.logic         = null;
+			this.isTouch       = false;
+			this.pointStart    = null;
 
 			this.menuGame      = document.querySelector('.menuGame');
 
@@ -373,24 +375,22 @@
 				this.inGameContent.style.width = 756 + 'px';
 			}.bind(this), 5);
 
-			let width = 600/this.level;
-			let widthI = this.imgGame.naturalWidth/this.level;
+			this.width = 600/this.level;
 			this.matrix       = [];
-			this.jumblyMatrix = [];
 			let matrixAll     = [];
 			for (let hangNgang = 0; hangNgang < this.level; hangNgang++) {
 				let cot = [];
 				for (let hangDoc = 0; hangDoc < this.level; hangDoc++) {
-					let data = {x:hangDoc*width, y:hangNgang*width};
+					let data = {x:hangDoc*this.width, y:hangNgang*this.width};
 					data.el = document.createElement('div');
-					data.el.setAttribute('style', 'width:'+width+'px;height:'+width+'px;left:'+data.x+'px;top:'+data.y+'px');
+					data.el.setAttribute('style', 'width:'+this.width+'px;height:'+this.width+'px;left:'+data.x+'px;top:'+data.y+'px');
 					if (hangNgang === 0 && hangDoc === this.level-1) {
 						data.el.setAttribute('class', 'item iNode pulse');
-						data.el.innerHTML = '<div style="height:'+width+'px;width:'+width+'px;">';
+						data.el.innerHTML = '<div style="height:'+this.width+'px;width:'+this.width+'px;">';
 						this.cursor = data;
 					}else{
 						data.el.setAttribute('class', 'item');
-						data.el.innerHTML = '<div style="background:url('+this.img+');height:'+width+'px;width:'+width+'px;background-position:'+ (-data.x) + 'px '+ (-data.y) + 'px;background-size:600px 600px;">'+
+						data.el.innerHTML = '<div style="background:url('+this.img+');height:'+this.width+'px;width:'+this.width+'px;background-position:'+ (-data.x) + 'px '+ (-data.y) + 'px;background-size:600px 600px;">'+
 							'</div>';
 					}
 					cot.push(data);
@@ -401,51 +401,84 @@
 				this.matrix.push(cot);
 			}
 
-			// sau 1 giây tráo vị trí và bắt đầu chơi
-			matrixAll = this.shuffle(matrixAll);
-			matrixAll = this.shuffle(matrixAll);
-			matrixAll = this.shuffle(matrixAll);
+			this.jumblyMatrix = [];
+
+
+			// Lấy ma trận sẵn sàng trộn
+			let allItem = this.getMatrixAll();
+			allItem = allItem.sort(function(a, b){
+				return a.el.offsetTop - b.el.offsetTop;
+			});
+			for (let i = 0; i < this.level; i++) {
+				let newArr = allItem.splice(0, this.level);
+				newArr.sort(function(a, b){
+					return a.el.offsetLeft - b.el.offsetLeft;
+				});
+				this.jumblyMatrix.push(newArr);
+			}
+
+			// Tìm con chỏ
+			let endF = false;
+			for (let i = 0; i < this.jumblyMatrix.length; i++) {
+				let getArr = this.jumblyMatrix[i];
+				for (let j = 0; j < getArr.length; j++) {
+					let check = getArr[j];
+					if (check === this.cursor) {
+						endF = true;
+						this.cursor.indexX = j;
+						this.cursor.indexY = i;
+						break;
+					}
+				}
+				if (endF) {
+					break;
+				}
+			}
+
 			this.regTime1 = setTimeout(function(){
-				let matrix = this.getMatrixAll();
-				matrix.forEach(function(obj, index){
-					let randomObj = matrixAll[index];
-					obj.el.style.left = randomObj.x + 'px';
-					obj.el.style.top  = randomObj.y + 'px';
-				}.bind(this));
-				matrixAll = null;
-				this.regTime2 = setTimeout(function(){
-					let allItem = this.getMatrixAll();
-					allItem = allItem.sort(function(a, b){
-						return a.el.offsetTop - b.el.offsetTop;
-					});
-					for (let i = 0; i < this.level; i++) {
-						let newArr = allItem.splice(0, this.level);
-						newArr.sort(function(a, b){
-							return a.el.offsetLeft - b.el.offsetLeft;
-						});
-						this.jumblyMatrix.push(newArr);
-					}
-					let endF = false;
-					for (let i = 0; i < this.jumblyMatrix.length; i++) {
-						let getArr = this.jumblyMatrix[i];
-						for (let j = 0; j < getArr.length; j++) {
-							let check = getArr[j];
-							if (check === this.cursor) {
-								endF = true;
-								this.cursor.indexX = j;
-								this.cursor.indexY = i;
-								break;
-							}
-						}
-						if (endF) {
+				// trộn ảnh
+				let totall = 1000*(this.level^2);
+				for (let i = 0; i < totall; i++) {
+					let r = this.randomInt(1, 5);
+					switch(r){
+						case 1:
+							this.moveLeft();
 							break;
-						}
+						case 2:
+							this.moveTop();
+							break;
+						case 3:
+							this.moveRight();
+							break;
+						case 4:
+							this.moveBottom();
+							break;
 					}
-					this.play();
-				}.bind(this), 500);
+				}
+				// Vẽ ảnh sáo trộn
+				this.paint = true;
+				let ic = 0;
+				this.jumblyMatrix.forEach(function(row, indexRow){
+					row.forEach(function(cell, indexCell){
+						setTimeout(function(){
+							let fromMatrix = this.matrix[indexRow][indexCell];
+							cell.el.style.left = fromMatrix.x + 'px';
+							cell.el.style.top  = fromMatrix.y + 'px';
+							let check = this.level-1;
+							if (indexRow === check && indexCell === check) {
+								this.play();
+							}
+						}.bind(this), ic*7);
+						ic++;
+					}.bind(this));
+				}.bind(this));
+				this.paint = false;
 			}.bind(this), 1000);
 		}
 
+		puzzle.prototype.randomInt = function(min, max) {
+			return min + Math.floor((max - min) * Math.random());
+		}
 		// Bắt đầu chơi
 		puzzle.prototype.play = function(){
 			this.isplay = true;
@@ -454,6 +487,7 @@
 		// Đóng game
 		puzzle.prototype.stop = function(){
 			this.isplay = false;
+			this.paint  = false;
 			this.inGame.style.display = 'none';
 			this.inGameContent.style.width = null;
 			this.boxGame.innerHTML = '';
@@ -462,9 +496,51 @@
 			clearTimeout(this.regTime2);
 		}
 
-		// đăng ký sự kiện nhấn
+		// đăng ký sự kiện nhấn và chạm
 		puzzle.prototype.addEventKeydown = function(){
-			window.addEventListener('keydown', this.keydown.bind(this));
+			window.addEventListener('keydown',   this.keydown.bind(this));
+
+			this.boxGame.addEventListener('touchstart',  this.touchStart.bind(this));
+			this.boxGame.addEventListener('touchmove',   this.touchMove.bind(this));
+			this.boxGame.addEventListener('touchend',    this.touchEnd.bind(this));
+			this.boxGame.addEventListener('touchcancel', this.touchEnd.bind(this));
+		}
+
+		puzzle.prototype.touchStart = function(e){
+			if (this.isplay) {
+				this.isTouch = true;
+				this.pointStart = e.changedTouches[0];
+			}
+		}
+		puzzle.prototype.touchMove = function(e){
+			if (this.isplay && this.isTouch) {
+				let tob  = e.changedTouches[0];
+				let dx   = tob.clientX - this.pointStart.clientX;
+				let dy   = tob.clientY - this.pointStart.clientY;
+
+				let bol2 = this.width/2;
+				if (dx >= bol2) {
+					this.moveRight();
+					this.touchEnd();
+				}
+				if (dx <= -bol2) {
+					this.moveLeft();
+					this.touchEnd();
+				}
+
+				if (dy >= bol2) {
+					this.moveBottom();
+					this.touchEnd();
+				}
+				if (dy <= -bol2) {
+					this.moveTop();
+					this.touchEnd();
+				}
+			}
+		}
+		puzzle.prototype.touchEnd = function(){
+			this.isTouch    = false;
+			this.pointStart = null;
 		}
 
 		puzzle.prototype.keydown = function(e){
@@ -522,31 +598,30 @@
 					case 'Ấ':
 					case 'ắ':
 					case 'Ắ':
+					case 'ứ':
+					case 'Ứ':
 						//bottom
 						this.moveBottom();
 						break;
 				}
+				this.checkWin();
 			}
 		}
 
 		puzzle.prototype.moveLeft = function(){
 			this.moveX(1);
-			this.checkWin();
 		}
 
 		puzzle.prototype.moveTop = function(){
 			this.moveY(1);
-			this.checkWin();
 		}
 
 		puzzle.prototype.moveRight = function(){
 			this.moveX(-1);
-			this.checkWin();
 		}
 
 		puzzle.prototype.moveBottom = function(){
 			this.moveY(-1);
-			this.checkWin();
 		}
 
 		// Di chuyển cùng cột
@@ -556,8 +631,10 @@
 			if (check !== void 0) {
 				this.jumblyMatrix[this.cursor.indexY][xNew]               = this.cursor;
 				this.jumblyMatrix[this.cursor.indexY][this.cursor.indexX] = check;
-				check.el.style.left       = this.matrix[this.cursor.indexY][this.cursor.indexX].x + 'px';
-				this.cursor.el.style.left = this.matrix[this.cursor.indexY][xNew].x + 'px';
+				if (this.isplay || this.paint) {
+					check.el.style.left       = this.matrix[this.cursor.indexY][this.cursor.indexX].x + 'px';
+					this.cursor.el.style.left = this.matrix[this.cursor.indexY][xNew].x + 'px';
+				}
 				this.cursor.indexX        = xNew;
 			}
 		}
@@ -570,8 +647,10 @@
 				check = check[this.cursor.indexX];
 				this.jumblyMatrix[yNew][this.cursor.indexX]               = this.cursor;
 				this.jumblyMatrix[this.cursor.indexY][this.cursor.indexX] = check;
-				check.el.style.top       = this.matrix[this.cursor.indexY][this.cursor.indexX].y + 'px';
-				this.cursor.el.style.top = this.matrix[yNew][this.cursor.indexX].y + 'px';
+				if (this.isplay || this.paint) {
+					check.el.style.top       = this.matrix[this.cursor.indexY][this.cursor.indexX].y + 'px';
+					this.cursor.el.style.top = this.matrix[yNew][this.cursor.indexX].y + 'px';
+				}
 				this.cursor.indexY       = yNew;
 			}
 		}
@@ -602,7 +681,6 @@
 					}
 				}
 				if (win === true) {
-					console.log('win');
 					this.win();
 				}
 			}
