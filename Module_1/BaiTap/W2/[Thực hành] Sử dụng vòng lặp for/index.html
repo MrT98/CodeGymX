@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Thực hành] Sử dụng vòng lặp for</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 600px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #eee;
+		}
+		.small {
+			font-style: .8rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="list"><strong>Bài 1:</strong></div>
+		<div class="list">
+			<div class="game1"></div>
+			<button id="btnBai1">Start</button>
+		</div>
+	</div>
+	<div class="regBox">
+		<div class="list"><strong>Bài 2:</strong></div>
+		<div class="list">
+			<button id="btnBai2">Start</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		let game1 = document.querySelector('.game1');
+		document.querySelector('#btnBai1').addEventListener('click', function(){
+			game1.innerHTML = '';
+			this.isStart = !this.isStart;
+			if (this.isStart) {
+				this.innerHTML = 'Stop';
+				this.arrTime = [];
+				for (let i = 0; i < 6; i++) {
+					let timeout = setTimeout(function(){
+						let p = document.createElement('p');
+						p.innerHTML = 'The number is ' + i;
+						game1.appendChild(p);
+					}.bind(this), i*70);
+					this.arrTime.push(timeout);
+				}
+			}else{
+				this.innerHTML = 'Start';
+				this.arrTime.forEach(function(time){
+					clearTimeout(time);
+				});
+				this.arrTime = [];
+			}
+		});
+
+		// Bai 2
+		document.querySelector('#btnBai2').addEventListener('click', function(){
+			let start = Number(prompt('Nhập một số bất kỳ', 0));
+			let totall = 0;
+			for (let i = 1; i <= start; i++) {
+				totall += i;
+			}
+			alert('Tổng từ 1 đến ' + start + ' là: ' + totall);
+		});
+
+	</script>
+</body>
+</html>
