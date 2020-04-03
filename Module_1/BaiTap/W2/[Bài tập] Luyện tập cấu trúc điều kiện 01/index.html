@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Bài tập] Luyện tập cấu trúc điều kiện 01</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+			font-family: arial;
+		}
+		.regBox {
+			background: #fff;
+			max-width: 700px;
+			margin: 30px auto 0 auto;
+		}
+		.list {
+			background: #fff;
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #ddd;
+		}
+		.small {
+			font-size: 0.9rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="list"><strong>Bài 1</strong></div>
+		<div class="list small">
+			<label for="numberA">Số A</label>
+			<input id="numberA" type="text" name="numberA" /><br><br>
+			<label for="numberB">Số B</label>
+			<input id="numberB" type="text" name="numberB" /><br><br>
+			<button id="checkAB">Kiểm tra</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 2</strong></div>
+		<div class="list small">
+			<label for="age">Nhập tuổi</label><br>
+			<input id="age" type="number" name="age" /><br><br>
+			<button id="checkAge">Kiểm tra</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 3</strong></div>
+		<div class="list small">
+			<label for="number0">Nhập một số bất kỳ</label><br>
+			<input id="number0" type="text" name="number0" /><br><br>
+			<button id="checkNumber0">Kiểm tra</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 4</strong></div>
+		<div class="list small">
+			<label for="bai4A">Nhập một số bất kỳ (1)</label><br>
+			<input id="bai4A" type="text" name="bai4A" /><br><br>
+			<label for="bai4B">Nhập một số bất kỳ (2)</label><br>
+			<input id="bai4B" type="text" name="bai4B" /><br><br>
+			<label for="bai4C">Nhập một số bất kỳ (3)</label><br>
+			<input id="bai4C" type="text" name="bai4C" /><br><br>
+			<button id="checkBai4">Kiểm tra</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 5</strong></div>
+		<div class="list small">
+			<label for="bai5A">Điểm các bài kiểm tra (hệ số x1)</label><br>
+			<input id="bai5A" type="text" name="bai5A" /><br><br>
+			<label for="bai5B">Điểm thi giữa kỳ (hệ số x2)</label><br>
+			<input id="bai5B" type="text" name="bai5B" /><br><br>
+			<label for="bai5C">Điểm thi cuối kỳ (hệ số x3)</label><br>
+			<input id="bai5C" type="text" name="bai5C" /><br><br>
+			<button id="checkBai5">Kiểm tra</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 6</strong></div>
+		<div class="list small">
+			<label for="doanhSo">Nhập doanh số bán hàng (VND - hoa hồng 10%)</label><br>
+			<input id="doanhSo" type="text" name="doanhSo" /><br><br>
+			<button id="checkBai6">Tính Hoa Hồng</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 7</strong></div>
+		<div class="list small">
+			<label for="soDien">Số điện trong tháng:</label><br>
+			<input id="soDien" type="text" name="soDien" /><br><br>
+			<label for="OneToOne">Tiền/1 số điện:</label><br>
+			<input id="OneToOne" type="text" name="OneToOne" /><br><br>
+			<button id="checkBai7">Tính tiền điện</button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		// Bài 1
+		let inputA     = document.querySelector('#numberA');
+		let inputB     = document.querySelector('#numberB');
+		let btnCheckAB = document.querySelector('#checkAB');
+		btnCheckAB.addEventListener('click', function() {
+			let check = inputA.value%inputB.value;
+			if (isNaN(check)) {
+				alert('Nhập số cũng sai...');
+			}else{
+				if (check === 0)
+					alert(inputA.value + ' có chia hết cho ' + inputB.value);
+				else
+					alert(inputA.value + ' không chia hết cho ' + inputB.value);
+			}
+		});
+
+		// Bài 2
+		let inputAge    = document.querySelector('#age');
+		let btnCheckAge = document.querySelector('#checkAge');
+		btnCheckAge.addEventListener('click', function() {
+			let check = inputAge.value-16;
+			if (isNaN(check)) {
+				alert('Nhập tuổi cũng sai...');
+			}else{
+				if (check < 0)
+					alert('Bạn không có tuổi vào lớp 10');
+				else
+					alert('Bạn đủ tuổi vào lớp 10');
+			}
+		});
+
+		// Bài 3
+		let inputNumber0    = document.querySelector('#number0');
+		let btnCheckNumber0 = document.querySelector('#checkNumber0');
+		btnCheckNumber0.addEventListener('click', function() {
+			let check = inputNumber0.value-0;
+			if (isNaN(check)) {
+				alert('Nhập số cũng sai...');
+			}else{
+				if (check < 0)
+					alert(inputNumber0.value + ' là số nhỏ hơn 0');
+				else if(check === 0)
+					alert(inputNumber0.value + ' là số không lớn hơn cũng chẳng nhỏ hơn 0');
+				else
+					alert(inputNumber0.value + ' là số lớn hơn 0');
+			}
+		});
+
+		// Bài 4
+		let inputB4A     = document.querySelector('#bai4A');
+		let inputB4B     = document.querySelector('#bai4B');
+		let inputB4C     = document.querySelector('#bai4C');
+		let btnCheckBai4 = document.querySelector('#checkBai4');
+		btnCheckBai4.addEventListener('click', function() {
+			if (isNaN(inputB4A.value-0) || isNaN(inputB4B.value-0) || isNaN(inputB4C.value-0)) {
+				alert('Nhập số cũng sai ạ...');
+			}else{
+				let max = inputB4A.value;
+				if (inputB4B.value > max)
+					max = inputB4B.value;
+				if(inputB4C.value > max)
+					max = inputB4C.value;
+
+				alert('Số lớn nhất là: ' + max);
+			}
+		});
+
+		// Bài 5
+		let inputB5A     = document.querySelector('#bai5A');
+		let inputB5B     = document.querySelector('#bai5B');
+		let inputB5C     = document.querySelector('#bai5C');
+		let btnCheckBai5 = document.querySelector('#checkBai5');
+		btnCheckBai5.addEventListener('click', function() {
+			if (isNaN(inputB5A.value-0) || isNaN(inputB5B.value-0) || isNaN(inputB5C.value-0)) {
+				alert('Nhập số cũng sai ạ...');
+			}else{
+				let endGame = (inputB5A.value*1 + inputB5B.value*2 + inputB5C.value*3)/3;
+				// Sếp hạng
+				let rank = '';
+				if (endGame >= 90) {
+					rank = 'Giỏi';
+				}else if(endGame >= 75){
+					rank = 'Khá';
+				}else if(endGame >= 50){
+					rank = 'Trung Bình';
+				}else if(endGame >= 35){
+					rank = 'Yếu';
+				}else{
+					rank = 'Kém';
+				}
+				alert('Điểm kết thúc kỳ là: ' + endGame.toFixed(2) + '\nSếp hạng học lực: ' + rank);
+			}
+		});
+
+		// Bài 6
+		let inputDoanhSo = document.querySelector('#doanhSo');
+		let btnCheckBai6 = document.querySelector('#checkBai6');
+		btnCheckBai6.addEventListener('click', function() {
+			if (isNaN(inputDoanhSo.value-0)) {
+				alert('Nhập số cũng sai ạ...');
+			}else{
+				let hoaHong = inputDoanhSo.value*10/100;
+				alert('Doanh số: ' + 
+					new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(inputDoanhSo.value) +
+					'\nHoa Hồng: ' + 
+					new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(hoaHong));
+			}
+		});
+
+		// Bài 7
+		let inputSoDien   = document.querySelector('#soDien');
+		let inputOneToOne = document.querySelector('#OneToOne');
+		let btnCheckBai7  = document.querySelector('#checkBai7');
+		btnCheckBai7.addEventListener('click', function() {
+			let tienDien = inputSoDien.value*inputOneToOne.value;
+			if (isNaN(tienDien)) {
+				alert('Nhập số cũng sai ạ...');
+			}else{
+				alert('Tiền điện phải chi trả là: ' + 
+					new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(tienDien));
+			}
+		});
+	</script>
+</body>
+</html>
