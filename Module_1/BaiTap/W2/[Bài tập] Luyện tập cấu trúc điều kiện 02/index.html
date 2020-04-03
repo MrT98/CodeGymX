@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Bài tập] Luyện tập cấu trúc điều kiện 02</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+			font-family: arial;
+		}
+		.regBox {
+			background: #fff;
+			max-width: 700px;
+			margin: 30px auto 0 auto;
+		}
+		.list {
+			background: #fff;
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #ddd;
+		}
+		.small {
+			font-size: 0.9rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="list"><strong>Bài 1:</strong> <span class="small">Chuyển từ độ C sang độ F.</span></div>
+		<div class="list small">
+			<label for="doC">Nhập độ C</label><br>
+			<input id="doC" type="text" name="doC" /><br><br>
+			<button id="checkBai1">Chuyển đổi</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 2:</strong> <span class="small">Convert from meters to feet</span></div>
+		<div class="list small">
+			<label for="meters">Enter meters:</label><br>
+			<input id="meters" type="text" name="meters" /><br><br>
+			<button id="checkBai2">Convert</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 3:</strong> <span class="small">Diện tích hình VUÔNG</span></div>
+		<div class="list small">
+			<label for="square">Nhập cạnh a (m):</label><br>
+			<input id="square" type="text" name="square" /><br><br>
+			<button id="checkBai3">Convert</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 4:</strong> <span class="small">Diện tích hình CHỮ NHẬT</span></div>
+		<div class="list small">
+			<label for="widthSquare">Chiều dài (m):</label><br>
+			<input id="widthSquare" type="text" name="widthSquare" /><br><br>
+			<label for="heightSquare">Chiều rộng (m):</label><br>
+			<input id="heightSquare" type="text" name="heightSquare" /><br><br>
+			<button id="checkBai4">Convert</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 5:</strong> <span class="small">Diện tích hình TAM GIÁC</span></div>
+		<div class="list small">
+			<label for="canhVuong1">Cạnh vuông 1 (m):</label><br>
+			<input id="canhVuong1" type="text" name="canhVuong1" /><br><br>
+			<label for="canhVuong2">Cạnh vuông 2 (m):</label><br>
+			<input id="canhVuong2" type="text" name="canhVuong2" /><br><br>
+			<button id="checkBai5">Convert</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 6:</strong> <span class="small">Giải phương trình bậc 1 (<strong>Ax + B = 0</strong>)</span></div>
+		<div class="list small">
+			<label for="numberB6A">Nhập A:</label><br>
+			<input id="numberB6A" type="text" name="numberB6A" /><br><br>
+			<label for="numberB6B">Nhập B:</label><br>
+			<input id="numberB6B" type="text" name="numberB6B" /><br><br>
+			<button id="checkBai6">Giải</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 7:</strong> <span class="small">Giải phương trình bậc 2 (<strong>Ax^2 + Bx + C = 0</strong>)</span></div>
+		<div class="list small">
+			<label for="numberB7A">Nhập A:</label><br>
+			<input id="numberB7A" type="text" name="numberB7A" /><br><br>
+			<label for="numberB7B">Nhập B:</label><br>
+			<input id="numberB7B" type="text" name="numberB7B" /><br><br>
+			<label for="numberB7C">Nhập C:</label><br>
+			<input id="numberB7C" type="text" name="numberB7C" /><br><br>
+			<button id="checkBai7">Giải</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 8:</strong> <span class="small">Kiểm tra tuổi</span></div>
+		<div class="list small">
+			<label for="age">Nhập một số:</label><br>
+			<input id="age" type="text" name="age" /><br><br>
+			<button id="checkBai8">Kiểm tra</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 9:</strong> <span class="small">Kiểm tra cạnh của một tam giác</span></div>
+		<div class="list small">
+			<label for="numberB9A">Nhập A:</label><br>
+			<input id="numberB9A" type="text" name="numberB9A" /><br><br>
+			<label for="numberB9B">Nhập B:</label><br>
+			<input id="numberB9B" type="text" name="numberB9B" /><br><br>
+			<label for="numberB9C">Nhập C:</label><br>
+			<input id="numberB9C" type="text" name="numberB9C" /><br><br>
+			<button id="checkBai9">Kiểm tra</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 10:</strong> <span class="small">Tính giá điện</span></div>
+		<div class="list small">
+			<label for="soDien">Nhập số điện:</label><br>
+			<input id="soDien" type="text" name="soDien" /><br><br>
+			<button id="checkBai10">Xem giá điện</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 11:</strong> <span class="small">Thuế thu nhập cá nhân</span></div>
+		<div class="list small">
+			<label for="thuNhap">Tổng thu nhập (đ):</label><br>
+			<input id="thuNhap" type="text" name="thuNhap" /><br><br>
+			<label for="mienThue">Khoản miễn thuế (đ):</label><br>
+			<input id="mienThue" type="text" name="mienThue" /><br><br>
+			<label for="giamTru">Khoản giảm trừ (đ):</label><br>
+			<input id="giamTru" type="text" name="giamTru" /><br><br>
+			<label for="thue">Thuế suất (%):</label><br>
+			<input id="thue" type="text" name="thue" /><br><br>
+			<button id="checkBai11">Tính thuế</button>
+		</div>
+	</div>
+
+	<div class="regBox">
+		<div class="list"><strong>Bài 12:</strong> <span class="small">Tính lãi suất ngân hàng</span></div>
+		<div class="list small">
+			<label for="tienGui">Số tiền gửi (đ):</label><br>
+			<input id="tienGui" type="text" name="tienGui" /><br><br>
+			<label for="thangGui">Số tháng gửi:</label><br>
+			<input id="thangGui" type="text" name="thangGui" /><br><br>
+			<label for="laiSuat">Lãi suất (%):</label><br>
+			<input id="laiSuat" type="text" name="laiSuat" /><br><br>
+			<button id="checkBai12">Tính lãi</button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		let inputDoC     = document.querySelector('#doC');
+		let btnCheckBai1 = document.querySelector('#checkBai1');
+		btnCheckBai1.addEventListener('click', function() {
+			let doF = inputDoC.value*9/5+32;
+			if (isNaN(doF)) {
+				alert('Vui lòng nhập độ C.');
+			}else{
+				alert(inputDoC.value + ' độ C = ' + doF + ' độ F');
+			}
+		});
+
+		// Bai 2
+		let inputMeters  = document.querySelector('#meters');
+		let btnCheckBai2 = document.querySelector('#checkBai2');
+		btnCheckBai2.addEventListener('click', function() {
+			let toFeet = inputMeters.value*3.2808;
+			if (isNaN(toFeet)) {
+				alert('Enter meters');
+			}else{
+				alert(inputMeters.value + ' meters = ' + toFeet + ' feet');
+			}
+		});
+
+		// Bai 3
+		let inputSquareA = document.querySelector('#square');
+		let btnCheckBai3 = document.querySelector('#checkBai3');
+		btnCheckBai3.addEventListener('click', function() {
+			let sSquare = inputSquareA.value*inputSquareA.value;
+			if (isNaN(sSquare)) {
+				alert('Vui lòng nhập độ dài cạnh a (m)');
+			}else{
+				alert('Diện tích hình vuông ' + sSquare + ' m2');
+			}
+		});
+
+		// Bai 4
+		let inputWidthSquare  = document.querySelector('#widthSquare');
+		let inputHeightSquare = document.querySelector('#heightSquare');
+		let btnCheckBai4 = document.querySelector('#checkBai4');
+		btnCheckBai4.addEventListener('click', function() {
+			let sSquare = inputWidthSquare.value*inputHeightSquare.value;
+			if (isNaN(sSquare)) {
+				alert('Vui lòng nhập số cho chiều dài và rộng');
+			}else{
+				alert('Diện tích hình chữ nhật là ' + sSquare + ' m2');
+			}
+		});
+
+		// Bai 5
+		let inputCanhVuong1 = document.querySelector('#canhVuong1');
+		let inputCanhVuong2 = document.querySelector('#canhVuong2');
+		let btnCheckBai5 = document.querySelector('#checkBai5');
+		btnCheckBai5.addEventListener('click', function() {
+			let S = 0.5*inputCanhVuong1.value*inputCanhVuong2.value;
+			if (isNaN(S)) {
+				alert('Vui lòng nhập số cho các cạnh');
+			}else{
+				alert('Diện tích hình tam giác là ' + S + ' m2');
+			}
+		});
+
+		// Bai 6
+		let inputNumberB6A = document.querySelector('#numberB6A');
+		let inputNumberB6B = document.querySelector('#numberB6B');
+		let btnCheckBai6   = document.querySelector('#checkBai6');
+		btnCheckBai6.addEventListener('click', function() {
+			let numberA = inputNumberB6A.value*1;
+			let numberB = inputNumberB6B.value*1;
+			if (isNaN(numberA) || isNaN(numberB)) {
+				alert('Vui lòng nhập số...');
+			}else{
+				if (numberA === 0) {
+					alert('Phương trình vô nghiệm');
+				}else{
+					if (numberB === 0) {
+						alert('Phương trình có 1 nghiệm x = 0');
+					}else{
+						alert('Phương trình có 1 nghiệm x = ' + (-numberB/numberA));
+					}
+				}
+			}
+		});
+
+		// Bài 7
+		let inputNumberB7A = document.querySelector('#numberB7A');
+		let inputNumberB7B = document.querySelector('#numberB7B');
+		let inputNumberB7C = document.querySelector('#numberB7C');
+		let btnCheckBai7   = document.querySelector('#checkBai7');
+		btnCheckBai7.addEventListener('click', function() {
+			let numberA = Number(inputNumberB7A.value);
+			let numberB = Number(inputNumberB7B.value);
+			let numberC = Number(inputNumberB7C.value);
+			if (isNaN(numberA) || isNaN(numberB) || isNaN(numberC)) {
+				alert('Vui lòng nhập số...');
+			}else{
+				if (numberA === 0) {
+					alert('A = 0, không thỏa mã điều kiện phương trình bậc 2.');
+				}else{
+					// tính delta
+					let delta = numberB*numberB - (4*numberA*numberC);
+					if (delta > 0) {
+						alert('Phương trình có 2 nghiệm phân biệt:\nx1 = ' +
+							((-numberB - Math.sqrt(delta))/(2*numberA)) + '\nx2 = ' +
+							((-numberB + Math.sqrt(delta))/(2*numberA)));
+					}else if (delta === 0){
+						alert('Phương trình có 1 duy nhất:\nx = ' + (-numberB/(2*numberA)));
+					}else{
+						alert('Phương trình vô nghiệm.');
+					}
+				}
+			}
+		});
+
+		// Bai 8
+		let inputAge = document.querySelector('#age');
+		let btnCheckBai8 = document.querySelector('#checkBai8');
+		btnCheckBai8.addEventListener('click', function(){
+			let check = Number(inputAge.value);
+			if (isNaN(check)) {
+				alert('Vui lòng nhập số ạ.');
+			}else{
+				if (check >= 0 && check <= 120) {
+					alert(check + ' là tuổi của một người ạ.');
+				}else{
+					alert(check + ' không phải là tuổi của một người ạ.');
+				}
+			}
+		});
+
+		// Bài 9
+		let inputNumberB9A = document.querySelector('#numberB9A');
+		let inputNumberB9B = document.querySelector('#numberB9B');
+		let inputNumberB9C = document.querySelector('#numberB9C');
+		let btnCheckBai9   = document.querySelector('#checkBai9');
+		btnCheckBai9.addEventListener('click', function() {
+			let numberA = Number(inputNumberB9A.value);
+			let numberB = Number(inputNumberB9B.value);
+			let numberC = Number(inputNumberB9C.value);
+			if (isNaN(numberA) || isNaN(numberB) || isNaN(numberC)) {
+				alert('Vui lòng nhập số, em khổ quá ạ...');
+			}else{
+				if (numberA <= 0 || numberB <= 0 || numberC <= 0) {
+					alert('Cạnh của tam gác phải lớn hơn 0 nhé.');
+				}else{
+					if ((numberA + numberB) > numberC &&
+						(numberB + numberC) > numberA &&
+						(numberA + numberC) > numberB)
+					{
+						alert(numberA + ', ' + numberB + ', ' + numberC + ' đều là cạnh của một tam giác');
+					}else{
+						alert(numberA + ', ' + numberB + ', ' + numberC + ' Không phải là cạnh của một tam giác');
+					}
+				}
+			}
+		});
+
+		// Bài 10
+		let inputSoDien   = document.querySelector('#soDien');
+		let btnCheckBai10 = document.querySelector('#checkBai10');
+		btnCheckBai10.addEventListener('click', function() {
+			let soDien = Number(inputSoDien.value);
+			if (isNaN(soDien)) {
+				alert('Vui lòng nhập số...');
+			}else{
+				let muc50 = soDien < 50 ? soDien : 50;
+				let colai = muc50 === 50 ? soDien-50 : 0;
+				let tienDien = muc50*1000;
+				tienDien += colai*1200;
+				tienDien = new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(tienDien);
+				alert('Tiền điện là: ' + tienDien);
+			}
+		});
+
+		// Bài 11
+		let inputThuNhap  = document.querySelector('#thuNhap');
+		let inputMienThue = document.querySelector('#mienThue');
+		let inputGiamTru  = document.querySelector('#giamTru');
+		let inputThue     = document.querySelector('#thue');
+		let btnCheckBai11 = document.querySelector('#checkBai11');
+		btnCheckBai11.addEventListener('click', function() {
+			let tinhThue = (inputThuNhap.value - inputMienThue.value - inputGiamTru.value)*inputThue.value/100;
+			if (isNaN(tinhThue)) {
+				alert('Vui kiểm tra lại các thông tin');
+			}else{
+				tinhThue = new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(tinhThue);
+				alert('Thuế bạn phải trả là: ' + tinhThue);
+			}
+		});
+
+		// Bài 12
+		let inputTienGui  = document.querySelector('#tienGui');
+		let inputThangGui = document.querySelector('#thangGui');
+		let inputLaiSuat  = document.querySelector('#laiSuat');
+		let btnCheckBai12 = document.querySelector('#checkBai12');
+		btnCheckBai12.addEventListener('click', function() {
+			let heSo = 1 + Number(inputLaiSuat.value)/100;
+			let lai  = inputTienGui.value*Math.pow(heSo, inputThangGui.value);
+			if (isNaN(lai)) {
+				alert('Vui kiểm tra lại các thông tin');
+			}else{
+				lai = new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(lai);
+				alert('Cả vốn lẫn lãi sau ' + inputThangGui.value + ' tháng là: ' + lai);
+			}
+		});
+	</script>
+</body>
+</html>
