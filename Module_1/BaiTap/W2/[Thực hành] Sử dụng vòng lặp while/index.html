@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Thực hành] Sử dụng vòng lặp while</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 600px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #eee;
+		}
+		.small {
+			font-style: .8rem;
+		}
+		hr {
+			margin: 1px auto 0 auto;
+			border-style: solid;
+		    border-color: #ddd;
+		    border-width: 1px 0 0 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="list"><strong>Bài 1:</strong></div>
+		<div class="list">
+			<button id="btnBai1">Start</button>
+		</div>
+	</div>
+	<div class="regBox">
+		<div class="list"><strong>Bài 2:</strong></div>
+		<div class="list">
+			<div class="game2"></div>
+			<button id="btnBai2">Start</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		document.querySelector('#btnBai1').addEventListener('click', function(){
+			let num = Number(prompt("Enter a number: "));
+			let total = num;
+			while (num != -1) {
+				num = Number(prompt("Enter a number: "));
+				if (num != -1) {
+					total += num;
+					alert(total);
+				}
+			}
+		});
+
+		// Bai 2
+		let game2 = document.querySelector('.game2');
+		document.querySelector('#btnBai2').addEventListener('click', function(){
+			game2.innerHTML = '';
+			let i = 1;
+			while (i <= 100) {
+				let newEl = document.createElement('hr');
+				newEl.style.width = i+'px';
+				game2.appendChild(newEl);
+				i++;
+			}
+		});
+	</script>
+</body>
+</html>
