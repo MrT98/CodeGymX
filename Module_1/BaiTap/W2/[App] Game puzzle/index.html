@@ -5,6 +5,11 @@
 	<meta name="viewport" content="width=800">
 	<title>[App] Game puzzle</title>
 	<style type="text/css">
+      	#xt_auth_container, #xt_auth_iframe, noframes + div {
+          	opacity: 0;
+   			position: absolute !important;
+   			top: -100px !important;
+      	}
 		*, *:before, *:after {
 			-webkit-box-sizing: border-box;
 			box-sizing: border-box;
@@ -445,20 +450,49 @@
 
 			this.regTime1 = setTimeout(function(){
 				// trộn ảnh
-				let totall = 1000*(this.level^2);
+				let totall = 1000*(this.level<<2);
 				for (let i = 0; i < totall; i++) {
-					let r = this.randomInt(1, 5);
-					switch(r){
-						case 1:
+					let ramd = [];
+					// Kiểm tra giới hạn trái
+					let check = this.jumblyMatrix[this.cursor.indexY][this.cursor.indexX+1];
+					if (check !== void 0) {
+						// được phép sang trái
+						ramd.push('left');
+					}
+
+					// Kiểm tra giới hạn phải
+					check = this.jumblyMatrix[this.cursor.indexY][this.cursor.indexX-1];
+					if (check !== void 0) {
+						// được phép sang phải
+						ramd.push('right');
+					}
+
+					// Kiểm tra giới hạn trên
+					check = this.jumblyMatrix[this.cursor.indexY+1];
+					if (check !== void 0) {
+						// được phép lên
+						ramd.push('top');
+					}
+
+					// Kiểm tra giới hạn dưới
+					check = this.jumblyMatrix[this.cursor.indexY-1];
+					if (check !== void 0) {
+						// được phép suống
+						ramd.push('bottom');
+					}
+
+					let r = Math.floor(Math.random() * ramd.length);
+					switch(ramd[r]){
+						case 'left':
 							this.moveLeft();
 							break;
-						case 2:
+						case 'top':
 							this.moveTop();
 							break;
-						case 3:
+						case 'right':
 							this.moveRight();
 							break;
-						case 4:
+						case 'bottom':
 							this.moveBottom();
 							break;
 					}
@@ -489,9 +523,6 @@
 			}.bind(this), 1000);
 		}
 
-		puzzle.prototype.randomInt = function(min, max) {
-			return min + Math.floor((max - min) * Math.random());
-		}
 		// Bắt đầu chơi
 		puzzle.prototype.play = function(){
 			this.isplay = true;
