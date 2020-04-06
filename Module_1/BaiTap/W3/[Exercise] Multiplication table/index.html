@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Exercise] Multiplication table</title>
+	<style type="text/css">
+		table {
+			width: 100%;
+			padding: 20px;
+		}
+		tr, td {
+			border: 1px solid #e5e5e5;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<table>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		let content = document.querySelector('tbody');
+		for (let tr = 1; tr <= 9; tr++) {
+			let newTR = document.createElement('tr');
+			for (let td = 2; td <= 9; td++) {
+				let newTD = document.createElement('td');
+				newTD.innerText = td + 'x' + tr + '=' + td*tr;
+				newTR.appendChild(newTD);
+			}
+			content.appendChild(newTR);
+		}
+	</script>
+</body>
+</html>
