@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Practice] Creating and manipulating arrays</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 700px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #e1e1e1;
+		}
+		.item {
+			padding: 5px 30px;
+		}
+		.item + .item {
+			border-top: 1px solid #e1e1e1;
+		}
+		.item span {
+			cursor: pointer;
+			float: right;
+    		color: #F44336;
+    	}
+	</style>
+</head>
+<body>
+	<div class="regBox">
+		<div class="list">
+			<label for="arr">Thêm phần tử mảng</label><br />
+			<input id="arr" type="type" name="arr"><br /><br />
+			<button id="add">Add</button>
+			<button id="clear">Clear</button>
+		</div>
+		<div class="list">
+			Quản lý phần tử:
+			<div id="content" style="margin-top: 10px;">
+			</div>
+		</div>
+		<div class="list">
+			JSON:
+			<div id="json" style="margin-top: 8px;color: #FF5722;">
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		let Item = function(value, index, Controll) {
+			this.Controll = Controll;
+			this.value = value;
+			this.index = index;
+			this.el = document.createElement('div');
+			this.el.setAttribute('class', 'item');
+			this.el.innerHTML = this.value +
+				 '<span>[x]</span>';
+			let button = this.el.querySelector('span');
+			button.addEventListener('click', function(){
+				this.Controll.removeItem(this);
+				this.destroy();
+			}.bind(this));
+		}
+		Item.prototype.destroy = function(){
+			this.value    = null;
+			this.index    = null;
+			this.el       = null;
+			this.Controll = null;
+		}
+
+
+
+
+
+		let Controll = function() {
+			this.array = [];
+
+			this.btnAdd     = document.querySelector('#add');
+			this.btnClear   = document.querySelector('#clear');
+			this.elInputArr = document.querySelector('#arr');
+			this.elJson     = document.querySelector('#json');
+			this.elContent  = document.querySelector('#content');
+
+			this.init();
+		}
+		Controll.prototype.init = function(){
+			this.btnClear.addEventListener('click', function(e){
+				this.clear();
+			}.bind(this));
+
+			this.btnAdd.addEventListener('click', function(e){
+				this.addItem();
+			}.bind(this));
+		}
+		Controll.prototype.addItem = function(){
+			let value = this.elInputArr.value.trim();
+			this.elInputArr.value    = '';
+			if (value.length > 0) {
+				let index = this.array.length;
+				this.array.push(value);
+
+				this.updateJson();
+
+				let item = new Item(value, index, this);
+				if (this.elContent.childNodes.length === 0) {
+					this.elContent.appendChild(item.el);
+				}else{
+					this.elContent.insertBefore(item.el, this.elContent.childNodes[0]);
+				}
+
+			}else{
+				alert('Vui lòng không để trống...');
+			}
+		}
+		Controll.prototype.clear = function(){
+			this.array               = [];
+			this.elContent.innerHTML = '';
+			this.elJson.innerHTML    = '';
+			this.elInputArr.value    = '';
+		}
+		Controll.prototype.removeItem = function(item){
+			item.el.remove();
+			this.array[item.index] = null;
+			this.updateJson();
+		}
+		Controll.prototype.updateJson = function(){
+			let arr = this.array.filter(function(e){
+				return e !== null;
+			});
+			if (arr.length > 0)
+				this.elJson.innerHTML = JSON.stringify(arr);
+			else{
+				this.array = [];
+				this.elJson.innerHTML = '';
+			}
+		}
+
+		new Controll();
+	</script>
+</body>
+</html>
