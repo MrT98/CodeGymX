@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Exercise] Practice loop 02</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+			font-family: arial;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 700px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #e1e1e1;
+		}
+		.small {
+			font-size: .85rem;
+		}
+	</style>
+</head>
+<body>
+	<!-- Bài 1 -->
+	<div class="regBox">
+		<div class="list">Bài 1:</div>
+		<div class="list">
+			<div id="printBai1"></div><br />
+			<button id="btnBai1">In dãy Finonaci</button>
+			<button id="btnBai1Close">Close</button>
+		</div>
+		<script type="text/javascript">
+			let printBai1    = document.querySelector('#printBai1');
+			let btnBai1      = document.querySelector('#btnBai1');
+			let btnBai1Close = document.querySelector('#btnBai1Close');
+			btnBai1Close.addEventListener('click', function(e) {
+				printBai1.innerHTML = '';
+			});
+			btnBai1.addEventListener('click', function(e) {
+				printBai1.innerHTML = '';
+				let list  = [];
+				let count = 0;
+				let first = 0;
+				let last  = 0;
+				while(count < 30){
+					if (first == 0) {
+						first = 1;
+						list.push(first);
+						count++;
+					}else if (first !== 0 && last === 0) {
+						last = first;
+						list.push(last);
+						count++;
+					}else if (first !== 0 && last !== 0) {
+						let temp = last;
+						last  = first+last;
+						first = temp;
+						list.push(last);
+						count++;
+					}
+				}
+				for(let finonaci of list) {
+					printBai1.innerHTML += finonaci + '<br />';
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 2 -->
+	<div class="regBox">
+		<div class="list">Bài 2:</div>
+		<div class="list">
+			<button id="btnBai2">Tính giai thừa</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai2 = document.querySelector('#btnBai2');
+			btnBai2.addEventListener('click', function(e) {
+				let enterNumber = Number(prompt('Enter a number.'));
+				if (isNaN(enterNumber) || enterNumber < 2) {
+					alert('Nhập vào một số nguyên lớn hơn 1');
+				}else{
+					let count = 1;
+					for (let i = enterNumber; i > 0; i--) {
+						count = count*i;
+					}
+					if (count ===  Infinity) {
+						alert('Vô cực...');
+					}else{
+						alert(count);
+					}
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 3 -->
+	<div class="regBox">
+		<div class="list">Bài 3:</div>
+		<div class="list">
+			<strong id="printBai3"></strong><br />
+			<button id="btnBai3">Start</button>
+			<button id="btnBai3Close">Close</button>
+		</div>
+		<script type="text/javascript">
+			let printBai3 = document.querySelector('#printBai3');
+			let btnBai3   = document.querySelector('#btnBai3');
+			let btnBai3Close = document.querySelector('#btnBai3Close');
+			btnBai3Close.addEventListener('click', function(e) {
+				printBai3.innerHTML = '';
+			});
+			btnBai3.addEventListener('click', function(e) {
+				printBai3.innerHTML = '';
+
+				// Tam giác 1
+				for (let i = 0; i < 5; i++) {
+					for (let j = 0; j <= i; j++) {
+						printBai3.innerHTML += '*&#160;';
+					}
+					printBai3.innerHTML += '<br />';
+				}
+
+				printBai3.innerHTML += '<br />';
+
+				// Tam giác 2
+				for (let i = 0; i < 5; i++) {
+					for (let j = 5-i; j > 0; j--) {
+						printBai3.innerHTML += '*&#160;';
+					}
+					printBai3.innerHTML += '<br />';
+				}
+
+				printBai3.innerHTML += '<br />';
+
+				// Tam giác 3
+				for (let i = 1; i < 6; i++) {
+					let plus = 5-i;
+					for (let j = 0; j < plus; j++) {
+						printBai3.innerHTML += '&#160;&#160;';
+					}
+					for (let j = 0; j < i; j++) {
+						printBai3.innerHTML += '*&#160;';
+					}
+					printBai3.innerHTML += '<br />';
+				}
+
+				printBai3.innerHTML += '<br />';
+
+				// Tam giác 4
+				for (let i = 0; i < 5; i++) {
+					let plus = 5-i;
+					for (let j = 0; j < i; j++) {
+						printBai3.innerHTML += '&#160;&#160;';
+					}
+					for (let j = 0; j < plus; j++) {
+						printBai3.innerHTML += '*&#160;';
+					}
+					printBai3.innerHTML += '<br />';
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 4 -->
+	<div class="regBox">
+		<div class="list">Bài 4:</div>
+		<div class="list">
+			<strong id="printBai4"></strong><br />
+			<button id="btnBai4">Start</button>
+			<button id="btnBai4Close">Close</button>
+		</div>
+		<script type="text/javascript">
+			let printBai4 = document.querySelector('#printBai4');
+			let btnBai4   = document.querySelector('#btnBai4');
+			let btnBai4Close = document.querySelector('#btnBai4Close');
+			btnBai4Close.addEventListener('click', function(e) {
+				printBai4.innerHTML = '';
+			});
+			btnBai4.addEventListener('click', function(e) {
+				printBai4.innerHTML = '';
+				// Tam giác 4
+				for (let i = 0; i < 5; i++) {
+					for (let j = 0; j < 20; j++) {
+						if (i === 0 || i === 4) {
+							printBai4.innerHTML += '*';
+						}else{
+							if (j === 0 || j === 9) {
+								printBai4.innerHTML += '*&#160;';
+							}else{
+								printBai4.innerHTML += '&#160;&#160;&#160;';
+
+							}
+						}
+					}
+					printBai4.innerHTML += '<br />';
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 5 -->
+	<div class="regBox">
+		<div class="list">Bài 5:</div>
+		<div class="list">
+			<label for="money">Tiền gửi</label><br />
+			<input id="money" type="text" name=""><br /><br />
+			<label for="month">Tháng gửi</label><br />
+			<input id="month" type="text" name=""><br /><br />
+			<label for="rate">Lãi xuất ngân hàng</label><br />
+			<input id="rate" type="text" name=""><br /><br />
+			<button id="btnBai5">Tính lãi</button>
+		</div>
+		<script type="text/javascript">
+			let enterMoney = document.querySelector('#money');
+			let enterMonth = document.querySelector('#month');
+			let enterRate  = document.querySelector('#rate');
+			let btnBai5    = document.querySelector('#btnBai5');
+			btnBai5.addEventListener('click', function(e) {
+				let money = Number(enterMoney.value);
+				let month = Number(enterMonth.value);
+				let rate  = Number(enterRate.value);
+				if (isNaN(money) || isNaN(month) || isNaN(rate)) {
+					alert('Vui lòng nhấp số...');
+				}else if(money < 1 || month < 1 || rate < 0){
+					alert('Kiểm tra lại các thông tin...');
+				}else{
+					for (let i = month; i > 0; i--) {
+						money += money*rate/100;
+					}
+					alert('Cả vốn lẫn lãi sau '+month+' tháng là: ' + new Intl.NumberFormat('vi-VN', {style: 'currency',currency: 'VND',}).format(money));
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 6 -->
+	<div class="regBox">
+		<div class="list">Bài 6:</div>
+		<div class="list">
+			<div id="contentBai6" style="line-height: 0.414rem;word-spacing:1.7px;"></div>
+			<button id="btnBai6">Vẽ hình trái tim</button>
+		</div>
+		<script type="text/javascript">
+			let contentBai6 = document.querySelector('#contentBai6');
+			let btnBai6     = document.querySelector('#btnBai6');
+			let heart = [
+				[0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0],
+				[0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0],
+				[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+				[0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
+			]
+			btnBai6.addEventListener('click', function(e) {
+				let content = '';
+				for (let i = 0; i < 21; i++) {
+					for (let j = 0; j < 21; j++) {
+						if (heart[i][j] === 0) {
+							content += '&#160;';
+						}else{
+							content += '*';
+						}
+					}
+					content += '<br />';
+				}
+				contentBai6.innerHTML = content;
+			});
+		</script>
+	</div>
+</body>
+</html>
