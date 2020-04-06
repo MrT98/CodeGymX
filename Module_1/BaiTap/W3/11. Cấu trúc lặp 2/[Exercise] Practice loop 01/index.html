@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Exercise] Practice loop 01</title>
+	<style type="text/css">
+		html, body {
+			background: #f6f6f6;
+			font-family: arial;
+		}
+		.regBox {
+			background: #fff;
+			margin: 30px auto 0 auto;
+			max-width: 700px;
+		}
+		.list {
+			padding: 15px;
+		}
+		.list + .list {
+			border-top: 1px solid #e1e1e1;
+		}
+		.small {
+			font-size: .85rem;
+		}
+	</style>
+</head>
+<body>
+	<!-- Bài 1 -->
+	<div class="regBox">
+		<div class="list">Bài 1:</div>
+		<div class="list">
+			<button id="btnBai1">Start</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai1 = document.querySelector('#btnBai1');
+			btnBai1.addEventListener('click', function(e) {
+				let i = 0;
+				while(i <= 100){
+					if (i === 99) {
+						alert('Hoàn thành');
+					}
+					i++;
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 2 -->
+	<div class="regBox">
+		<div class="list">Bài 2:</div>
+		<div class="list">
+			<button id="btnBai2">Start</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai2 = document.querySelector('#btnBai2');
+			btnBai2.addEventListener('click', function(e) {
+				let check = false;
+				let data = Number(prompt('nhiệt độ hiện tại?'));
+				while(!check){
+					if (data < 20){
+						data = Number(prompt('Hãy tăng nhiệt độ?'));
+					}else if (data > 100) {
+						data = Number(prompt('Hãy giảm nhiệt độ?'));
+					}else{
+						check = true;
+					}
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 3 -->
+	<div class="regBox">
+		<div class="list">Bài 3:</div>
+		<div class="list">
+			<button id="btnBai3">Start</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai3 = document.querySelector('#btnBai3');
+			btnBai3.addEventListener('click', function(e) {
+				let list  = [];
+				let count = 0;
+				let first = 0;
+				let last  = 0;
+				while(count < 20){
+					if (first == 0) {
+						first = 1;
+						list.push(first);
+						count++;
+					}else if (first !== 0 && last === 0) {
+						last = first;
+						list.push(last);
+						count++;
+					}else if (first !== 0 && last !== 0) {
+						let temp = last;
+						last  = first+last;
+						first = temp;
+						list.push(last);
+						count++;
+					}
+				}
+				alert(list);
+				console.log(list);
+			});
+		</script>
+	</div>
+
+	<!-- Bài 4 -->
+	<div class="regBox">
+		<div class="list">Bài 4:</div>
+		<div class="list">
+			<button id="btnBai4">Start</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai4 = document.querySelector('#btnBai4');
+			btnBai4.addEventListener('click', function(e) {
+				let list  = [];
+				let count = 0;
+				let first = 0;
+				let last  = 0;
+				while(count < 20){
+					if (first == 0) {
+						first = 1;
+						list.push(first);
+						count++;
+					}else if (first !== 0 && last === 0) {
+						last = first;
+						list.push(last);
+						count++;
+					}else if (first !== 0 && last !== 0) {
+						let temp = last;
+						last  = first+last;
+						first = temp;
+						list.push(last);
+						count++;
+					}
+				}
+				for (let i = 0; i < list.length; i++) {
+					//if (list[i]%5 === 0 && list[i] !== 5) {
+					if (list[i]%5 === 0) {
+						alert(list[i]);
+						break;
+					}
+				}
+			});
+		</script>
+	</div>
+
+	<!-- Bài 5 -->
+	<div class="regBox">
+		<div class="list">Bài 5:</div>
+		<div class="list">
+			<button id="btnBai5">Start</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai5 = document.querySelector('#btnBai5');
+			btnBai5.addEventListener('click', function(e) {
+				let list  = [];
+				let count = 0;
+				let first = 0;
+				let last  = 0;
+				while(count < 20){
+					if (first == 0) {
+						first = 1;
+						list.push(first);
+						count++;
+					}else if (first !== 0 && last === 0) {
+						last = first;
+						list.push(last);
+						count++;
+					}else if (first !== 0 && last !== 0) {
+						let temp = last;
+						last  = first+last;
+						first = temp;
+						list.push(last);
+						count++;
+					}
+				}
+				let totall = list.reduce(function(a, b){
+					return a + b;
+				});
+				alert(totall);
+				console.log(totall);
+			});
+		</script>
+	</div>
+
+	<!-- Bài 6 -->
+	<div class="regBox">
+		<div class="list">Bài 6:</div>
+		<div class="list">
+			<button id="btnBai6">Start</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai6 = document.querySelector('#btnBai6');
+			btnBai6.addEventListener('click', function(e) {
+				let list  = [];
+				let count = 0;
+				let i = 7;
+				while(count < 30){
+					if (i%7 === 0) {
+						list.push(i);
+						count++;
+					}
+					i++;
+				}
+				let totall = list.reduce(function(a, b){
+					return a + b;
+				});
+				alert(totall);
+				console.log(list);
+			});
+		</script>
+	</div>
+
+	<!-- Bài 7 -->
+	<div class="regBox">
+		<div class="list">Bài 7:</div>
+		<div class="list">
+			<button id="btnBai7">Start</button>
+		</div>
+		<script type="text/javascript">
+			let btnBai7 = document.querySelector('#btnBai7');
+			btnBai7.addEventListener('click', function(e) {
+				let list  = [];
+				for (let i = 1; i <= 100; i++) {
+					if (i%3 === 0 && i%5 === 0) {
+						list.push('FizzBuzz');
+					}else if(i%3 === 0){
+						list.push('Fizz');
+					}else if(i%5 === 0){
+						list.push('Buzz');
+					}else{
+						list.push(i);
+					}
+				}
+				alert(list);
+				console.log(list);
+			});
+		</script>
+	</div>
+
+	<!-- Bài 8 -->
+	<div class="regBox">
+		<div class="list">Bài 8:</div>
+		<div class="list">
+			<!-- <span id="level"></span><br /><br /> -->
+			<button id="btnBai8">Start</button>
+			<button id="btnBai8Reset">Restart game</button>
+		</div>
+		<script type="text/javascript">
+			let Game = function(){
+				//this.elLevel      = document.querySelector('#level');
+				this.btnBai8Reset = document.querySelector('#btnBai8Reset');
+				this.btnBai8      = document.querySelector('#btnBai8');
+				this.level        = 0;
+				this.countFalse   = 1;
+				this.init();
+			}
+			Game.prototype.init = function() {
+				this.btnBai8.addEventListener('click', function(e) {
+					this.start();
+				}.bind(this));
+
+				this.btnBai8Reset.addEventListener('click', function(e) {
+					this.restart();
+				}.bind(this));
+			};
+			Game.prototype.start = function() {
+				//this.update();
+				if (this.countFalse < 4) {
+					let enterSelect = Number(prompt('Level ' + this.level + ', lượt ' + this.countFalse + '\nNhập vào lựa chọn: (1, 2, 3, 4)'));
+					let random = Math.floor(Math.random()*4)+1;
+					if (enterSelect === random) {
+						alert('Lựa chọn đúng, vòng chơi tiếp theo.');
+						this.level++;
+						this.countFalse = 1;
+						//this.update();
+					}else{
+						this.countFalse++;
+						alert('Lựa chọn sai, kết quả của chúng tôi là: ' + random + '\n\nCơ hội tiếp theo...');
+					}
+					this.start();
+				}else{
+					alert('Bạn đã trả lời sai quá 3 lần cho 1 Level chơi, trò chơi kết thúc.');
+					this.stop();
+				}
+			};
+			Game.prototype.restart = function() {
+				this.level      = 0;
+				this.countFalse = 1;
+				this.start();
+				//this.update();
+			};
+			Game.prototype.stop = function() {
+				this.countFalse = 1;
+				this.level      = 0;
+				//this.update();
+			};
+			Game.prototype.update = function() {
+				//this.elLevel.innerHTML = 'Level: ' + this.level;
+			}
+			new Game();
+		</script>
+	</div>
+</body>
+</html>
