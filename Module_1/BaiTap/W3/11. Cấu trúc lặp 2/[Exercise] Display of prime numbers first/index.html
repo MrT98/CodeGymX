@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>[Exercise] Display of prime numbers first</title>
+</head>
+<body>
+	<script type="text/javascript">
+		let count = 0, numbers = 20, i = 2, list = [];
+		let update = function(i) {
+			count++;
+			list.push(i);
+		}
+		while(count < numbers){
+			if (i ===2) {
+				update(i);
+			}else{
+				let check = true;
+				for (let j = Math.ceil(i/2); j >= 2; j--) {
+					if (i%j === 0) {
+						check = false;
+						break;
+					}
+				}
+				if (check) {
+					update(i);
+				}
+			}
+			i++;
+		}
+		alert(list);
+		console.log(list);
+	</script>
+</body>
+</html>
