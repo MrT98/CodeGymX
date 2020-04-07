@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<title>[Practice] Creating a simple caro chessboard</title>
 	<style type="text/css">
+		#xt_auth_container, #xt_auth_iframe, noframes + div {
+          	opacity: 0;
+   			position: absolute !important;
+   			top: -100px !important;
+      	}
 		*, *:before, *:after {
 			-webkit-box-sizing: border-box;
 			box-sizing: border-box;
@@ -46,7 +52,7 @@
 		}
 		.boxPlayer .player + .player {
 			margin-right: 53px;
-			margin-left: 64px;
+			margin-left: 18px;
 		}
 		#changerStatus {
 			padding: 7px 15px;
@@ -71,7 +77,7 @@
 			margin: 0 auto;
 			width: 800px;
 			height: 800px;
-			touch-action: none;
+			/* touch-action: none; */
 		}
 		.gameBox .item {
 			position: absolute;
@@ -79,6 +85,10 @@
 			align-items: center;
 			justify-content: center;
 			transition: left .2s, top .2s;
+		}
+		.gameBox .item * {
+			/* touch-action: none; */
+			pointer-events: none;
 		}
 		.gameBox .item .ripple, .gameBox .item .defineXO {
 			width: 100%;
@@ -103,11 +113,18 @@
 			transform: scale(0);
 			opacity: 0;
 		}
-		.gameBox .item.activeX .ripple .ripple-element, .gameBox.isPlayX .ripple .ripple-element{
+		.gameBox.isPlayX .ripple .ripple-element{
 			background: #2196F3;
 		}
-		.gameBox .item.activeO .ripple .ripple-element, .gameBox.isPlayO .ripple .ripple-element {
+		.gameBox.isPlayO .ripple .ripple-element {
 			background: #FF5722;
+		}
+
+		.gameBox .item.activeX .ripple .ripple-element {
+			background: none;
+		}
+		.gameBox .item.activeO .ripple .ripple-element {
+			background: none;
 		}
 
 		.gameBox .item:hover .ripple .ripple-element {
@@ -255,19 +272,19 @@
 	<header class="z-depth">
 		<div class="boxPlayer">
 			<div class="player">
-				<div style="display: flex;">
-					<span id="winX" style="color: #008eff; font-size: 0.8rem; width: 50%;">Win:0<span>
+				<div style="display: flex; width: 80%;">
+					<span id="winX" style="color: #008eff; font-size: 0.8rem">Win:0<span>
 				</div>
-				<div style="display: flex;justify-content: flex-end; width: 50%;">
+				<div style="display: flex;justify-content: flex-end; width: 20%;">
 					<span style="color: #008eff;">X<span>
 				</div>
 			</div>
 			<div class="player">
-				<div style="display: flex;">
+				<div style="display: flex; width: 20%;">
 					<span style="color: #FF5722;">O<span>
 				</div>
-				<div style="display: flex;justify-content: flex-end; width: 50%;">
-					<span id="winO" style="color: #FF5722; font-size: 0.8rem; width: 50%;">Win:0<span>
+				<div style="display: flex;justify-content: flex-end; width: 80%;">
+					<span id="winO" style="color: #FF5722; font-size: 0.8rem">Win:0<span>
 				</div>
 			</div>
 			<button id="changerStatus">Start</button>
@@ -308,12 +325,26 @@
 			this.init();
 		}
 		Item.prototype.init = function() {
-			this.el.addEventListener('click', this.eventClick.bind(this));
+			this.el.addEventListener('click',      this.eventClick.bind(this));
+			this.el.addEventListener('touchstart', this.touchStart.bind(this));
+			this.el.addEventListener('touchenter', this.touchEnter.bind(this));
+			this.el.addEventListener('touchend',   this.touchEnd.bind(this));
+		}
+		Item.prototype.touchStart = function(e) {
+			//console.log('start', e);
+		}
+		Item.prototype.touchEnter = function(e) {
+			//console.log('start', e.target);
+			this.eventClick();
+		}
+		Item.prototype.touchEnd = function(e) {
+			//console.log('end', e);
+
 		}
 		Item.prototype.eventClick = function() {
 			if (this.RedT.isPlay) {
-				this.isActive = !this.isActive;
-				if (this.isActive) {
+				if (this.isActive === false) {
+					this.isActive = true;
 					if (this.RedT.player === 0) {
 						this.el.classList.add('activeO');
 					}else{
@@ -345,8 +376,6 @@
 			this.changerStatus = document.querySelector('#changerStatus');
 			this.elWinO        = document.querySelector('#winO');
 			this.elWinX        = document.querySelector('#winX');
-
-			// winO
 			// element dialog
 			this.dialog             = document.querySelector('.dialog');
 			this.dialogContent      = this.dialog.querySelector('.content');
@@ -415,9 +444,11 @@
 
 		Game.prototype.changerPlayer = function(){
 			this.checWin();
-			this.gameBox.classList.remove(this.arrPlay[this.player]);
-			this.player = this.player === 0 ? 1 : 0;
-			this.gameBox.classList.add(this.arrPlay[this.player]);
+			if (this.isPlay) {
+				this.gameBox.classList.remove(this.arrPlay[this.player]);
+				this.player = this.player === 0 ? 1 : 0;
+				this.gameBox.classList.add(this.arrPlay[this.player]);
+			}
 		}
 
 		Game.prototype.paint = function(){
@@ -454,21 +485,23 @@
 		}
 
 		Game.prototype.win = function(win){
-			this.isPlay = false;
-			this.showWinPlayer();
-			if (win.player === 0) {
-				this.winPlayerO++;
-				this.dialogWinPlayer.innerText = 'O';
-				this.dialogWinPlayer.classList.remove('PlayerX');
-				this.dialogWinPlayer.classList.add('PlayerO');
-			}else{
-				this.winPlayerX++;
-				this.dialogWinPlayer.innerText = 'X';
-				this.dialogWinPlayer.classList.remove('PlayerO');
-				this.dialogWinPlayer.classList.add('PlayerX');
-			}
-			this.elWinO.innerText = 'Win: ' + this.winPlayerO;
-			this.elWinX.innerText = 'Win: ' + this.winPlayerX;
+			this.stop();
+			setTimeout(function(){
+				this.showWinPlayer();
+				if (win.player === 0) {
+					this.winPlayerO++;
+					this.dialogWinPlayer.innerText = 'O';
+					this.dialogWinPlayer.classList.remove('PlayerX');
+					this.dialogWinPlayer.classList.add('PlayerO');
+				}else{
+					this.winPlayerX++;
+					this.dialogWinPlayer.innerText = 'X';
+					this.dialogWinPlayer.classList.remove('PlayerO');
+					this.dialogWinPlayer.classList.add('PlayerX');
+				}
+				this.elWinO.innerText = 'Win: ' + this.winPlayerO;
+				this.elWinX.innerText = 'Win: ' + this.winPlayerX;
+			}.bind(this), 1000);
 		}
 
 		Game.prototype.checWin = function(){
@@ -533,7 +566,7 @@
 		}
 		//
 		Game.prototype.checWinLeft = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:0, type: 'left', player:item.RedT.type, length:1, first:item, last:null};
 			let x    = item.RedT.x-1;
 			let win  = true;
 			while(win){
@@ -552,7 +585,7 @@
 			return void 0;
 		}
 		Game.prototype.checWinLeftTop = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:45, player:item.RedT.type, length:1, first:item, last:null};
 			let x    = item.RedT.x-1;
 			let y    = item.RedT.y-1;
 			let win  = true;
@@ -578,7 +611,7 @@
 			return void 0;
 		}
 		Game.prototype.checWinLeftBottom = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:-45, player:item.RedT.type, length:1, first:item, last:null};
 			let x    = item.RedT.x-1;
 			let y    = item.RedT.y+1;
 			let win  = true;
@@ -605,7 +638,7 @@
 		}
 
 		Game.prototype.checWinRight = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:0, type: 'right', player:item.RedT.type, length:1, first:item, last:null};
 			let x    = item.RedT.x+1;
 			let win  = true;
 			while(win){
@@ -624,7 +657,7 @@
 			return void 0;
 		}
 		Game.prototype.checWinRightTop = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:-45, player:item.RedT.type, length:1, first:item, last:null};
 			let x    = item.RedT.x+1;
 			let y    = item.RedT.y-1;
 			let win  = true;
@@ -650,7 +683,7 @@
 			return void 0;
 		}
 		Game.prototype.checWinRightBottom = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:45, player:item.RedT.type, length:1, first:item, last:null};
 			let x    = item.RedT.x+1;
 			let y    = item.RedT.y+1;
 			let win  = true;
@@ -677,7 +710,7 @@
 		}
 
 		Game.prototype.checWinTop = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:0, type: 'top', player:item.RedT.type, length:1, first:item, last:null};
 			let y    = item.RedT.y-1;
 			let win  = true;
 			while(win){
@@ -697,7 +730,7 @@
 		}
 
 		Game.prototype.checWinBottom = function(item){
-			let data = {player:item.RedT.type, length:1, first:item, last:null};
+			let data = {rotate:0, type: 'bottom', player:item.RedT.type, length:1, first:item, last:null};
 			let y    = item.RedT.y+1;
 			let win  = true;
 			while(win){
