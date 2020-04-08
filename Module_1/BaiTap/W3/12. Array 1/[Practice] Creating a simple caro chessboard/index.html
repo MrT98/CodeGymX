@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<title>[Practice] Creating a simple caro chessboard</title>
 	<style type="text/css">
@@ -714,10 +715,15 @@
 			let y    = item.RedT.y-1;
 			let win  = true;
 			while(win){
-				let a = this.matrix[y][item.RedT.x];
-				if (a !== void 0 && a.RedT.type === item.RedT.type) {
-					data.length++;
-					data.last = a;
+				let aY = this.matrix[y];
+				if (aY !== void 0) {
+					let a = this.matrix[y][item.RedT.x];
+					if (a !== void 0 && a.RedT.type === item.RedT.type) {
+						data.length++;
+						data.last = a;
+					}else{
+						win = false;
+					}
 				}else{
 					win = false;
 				}
@@ -734,10 +740,15 @@
 			let y    = item.RedT.y+1;
 			let win  = true;
 			while(win){
-				let a = this.matrix[y][item.RedT.x];
-				if (a !== void 0 && a.RedT.type === item.RedT.type) {
-					data.length++;
-					data.last = a;
+				let aY = this.matrix[y];
+				if (aY !== void 0) {
+					let a = this.matrix[y][item.RedT.x];
+					if (a !== void 0 && a.RedT.type === item.RedT.type) {
+						data.length++;
+						data.last = a;
+					}else{
+						win = false;
+					}
 				}else{
 					win = false;
 				}
